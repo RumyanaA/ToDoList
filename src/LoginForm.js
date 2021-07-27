@@ -32,7 +32,7 @@ handleChange(event) {
         </div>
         <div className="box">
             
-                <InputField className='login-input'  placeholder='username' label='' name='username'type='text' onChange={this.handleChange} /> 
+                <InputField  className='login-input'  placeholder='username' label='' name='username' type='text' onChange={this.handleChange} /> 
                 <InputField className='login-input'  placeholder='password' name='password' onChange={this.handleChange} />
                 <Button   label="Login" onClick={this.submit}  />
                 {/* <ForgottenPassword onClick={this.props.onClick} /> */}

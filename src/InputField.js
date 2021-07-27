@@ -18,6 +18,7 @@ const InputField = ({
     <React.Fragment>
       <label className='floating-label' htmlFor={name}>{label}</label>
       <input
+      required
         id={name}
         name={name}
         type={type}
@@ -39,11 +40,11 @@ InputField.defaultProps = {
 
 InputField.propTypes = {
   name: PropTypes.string.isRequired,
-  type: PropTypes.string,
+  type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   type: PropTypes.oneOf(['text', 'number', 'password']),
   className: PropTypes.string,
-  value: PropTypes.any,
+  value: PropTypes.any.isRequired,
   onChange: PropTypes.func.isRequired
 }
 export default InputField;

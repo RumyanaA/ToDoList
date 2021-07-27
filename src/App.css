@@ -1,13 +1,15 @@
 .log-form{
-  border-style: inset;
+  border: 2px solid rgba(228, 141, 213, 0.945);
+  border-radius: 50px;
   width: 20%;
   margin-top: 100px;
-  margin-left: 300px;
+  margin-left: 600px;
   padding: 20px;
   
 }
 .password-link{
   color: blue;
+  cursor: pointer;
 }
 
 .button{

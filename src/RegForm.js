@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import InputField from './InputField';
 import Button from './Button';
+import axios from 'axios';
+import ls from 'local-storage';
 
 class Reg extends React.Component{
     constructor(props){
@@ -19,10 +21,14 @@ class Reg extends React.Component{
         userData[event.target.name]=event.target.value;
         this.setState(userData);
       }
-      submit(){
+     async submit() {
+         
           var userData=this.state;
-    
-      }
+          var res = await axios.post('http://localhost:8081/userInfo', userData);
+
+          var token = res.data;
+          localStorage.setItem('token', token);
+        }
     render(){
         return (
             <div className="inner-container">
@@ -30,9 +36,9 @@ class Reg extends React.Component{
           Register
         </div>
         <div className="box">
-                <InputField className='login-input'  placeholder='Email' name='email'type='text' onChange={this.handleChange} />    
+                <InputField className='login-input'  placeholder='Email' name='email'type='email' onChange={this.handleChange} />    
                 <InputField className='login-input'  placeholder='Username' name='username'type='text' onChange={this.handleChange} /> 
-                <InputField className='login-input'  placeholder='Password' name='password' onChange={this.handleChange} />
+                <InputField className='login-input'  placeholder='Password' name='password'type='password' onChange={this.handleChange} />
                 <Button   label="Register" onClick={this.submit}  />
             </div>
             </div>   
