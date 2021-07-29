@@ -9,6 +9,7 @@
 }
 .text-error{
   color: red;
+  display: block;
 }
 .password-link{
   color: blue;
@@ -23,10 +24,11 @@
     border-radius: 3px;
     font-family: Oxygen, sans-serif;
     background-color: rgba(15, 15, 15, 0.03);
-    margin-top: 20px;
+    margin-top: 15px;
     border: 2px solid #417cef;
     transition: background-color 0.3s ease-out;
     cursor: pointer;
+    
 }
 .button:hover,
 .button:focus {

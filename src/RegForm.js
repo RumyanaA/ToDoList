@@ -37,7 +37,7 @@ class Reg extends React.Component{
               passwordError='Password must be 7 letters long';
           }
           if(!this.state.email || reg.test(this.state.email===false) ){
-              emailError='Email Field is Invalid ';
+              emailError='Email Field is Invalid';
           }
           if(emailError || usernameError || passwordError){
             this.setState({usernameError,emailError,passwordError});
