@@ -7,6 +7,9 @@
   padding: 20px;
   
 }
+.text-error{
+  color: red;
+}
 .password-link{
   color: blue;
   cursor: pointer;
