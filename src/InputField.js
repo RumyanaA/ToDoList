@@ -39,12 +39,12 @@ InputField.defaultProps = {
 }
 
 InputField.propTypes = {
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  type: PropTypes.string,
   placeholder: PropTypes.string,
   type: PropTypes.oneOf(['text', 'number', 'password']),
   className: PropTypes.string,
-  value: PropTypes.any.isRequired,
-  onChange: PropTypes.func.isRequired
+  value: PropTypes.any,
+  onChange: PropTypes.func
 }
 export default InputField;

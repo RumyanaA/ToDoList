@@ -1,18 +1,19 @@
-var dbConnect = require('./../config/dbConnect.js');
+const client=require('./../config/dbConnect');
 var logger = require('./../services/LoggingService.js');
 class UsersModel {
-    async addUser(userData) {
+   static async addUser(userData) {
 
-        var db = dbConnect();
+        
+        // var db=client.db;
         try {
-            var result = await db.collection("Users").insertOne(userData)
-            return (result[length - 1]._id);
+            var result = await client.get().collection("Users").insertOne(userData)
+            return (result.insertedId.toString());
         }
         catch (e) {
             logger.error(e.message);
             //txt.
         }
-        db.close();
+        // db.close();
 
     }
 }

@@ -63,7 +63,7 @@ class Reg extends React.Component{
           Register
         </div>
         <div className="box">
-                <InputField className='login-input'  placeholder='Email' name='email'type='email' onChange={this.handleChange} />
+                <InputField className='login-input'  placeholder='Email' name='email'type='text' onChange={this.handleChange} />
                 <span className="text-error">{this.state.emailError}</span>    
                 <InputField className='login-input'  placeholder='Username' name='username'type='text' onChange={this.handleChange} />
                 <span className="text-error">{this.state.usernameError}</span> 
