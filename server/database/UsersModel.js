@@ -22,7 +22,7 @@ class UsersModel {
             if(result.length==1){
                 return (result[0]._id);
             }else{
-                return -1;
+                return '-1';
             }
         }
         catch(e){

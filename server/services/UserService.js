@@ -13,8 +13,8 @@ module.exports= class UserService{
     }
     static async tokenOnLogin(userData){
         var verifiedUserId=await UsersModel.verifyUser(userData);
-        if(verifiedUserId==-1){
-            return -1;
+        if(verifiedUserId=='-1'){
+            return '-1';
         }else{
         var token=jwt.sign({ id: verifiedUserId }, config.JWT_SECRET, {
             expiresIn: config.JWT_EXPIRES_IN,

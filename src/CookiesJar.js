@@ -1,15 +1,15 @@
 import React from "react";
-import { Cookies } from 'react-cookie';
+import  { Cookies }  from 'react-cookie';
 const cookies = new Cookies();
 
 class CookiesJar extends React.Component {
     constructor(props) {
         super(props);
     }
-    setCookie = (key, value) => {
+     setCookie = (key, value) => {
         cookies.set(key, value)
     }
-    getCookie = (key) => {
+     getCookie = (key) => {
         return cookies.get(key)
     }
 }

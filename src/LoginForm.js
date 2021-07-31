@@ -6,7 +6,6 @@ import CookiesJar from "./CookiesJar";
 class Login extends CookiesJar{
     constructor(props){
         super(props);
-        
     this.state = {
         username: '',
         password: '',
@@ -40,16 +39,22 @@ handleChange(event) {
       }
 
   }
-  submit(){
+  async submit(){
       if(this.validation()){
-      var userData=this.state;
+      var userData={
+          username: this.state.username,
+          password: this.state.password,
+      }
       var res = await axios.post('http://localhost:8081/Login', userData);
       var token = res.data;
-      if(token ==-1){
-          this.userError='User not found';
-          this.setState({userError});
+      if(token =='-1'){
+        //   this.userError='User not found';
+          this.setState({
+              userError:'User not found'
+            });
       }else{
-      super.setCookie('userToken', token);
+        this.setCookie('userLogToken', token);
+        console.log(this.getCookie('userLogToken'));
       }
       
         //login user

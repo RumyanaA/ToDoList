@@ -49,7 +49,11 @@ class Reg extends React.Component{
      async submit() {
          if(this.validation()){
          
-          var userData=this.state;
+            var userData={
+                email: this.state.email,
+                username: this.state.username,
+                password: this.state.password,
+            }
           var res = await axios.post('http://localhost:8081/Register', userData);
           var token = res.data;
           const cookies = new Cookies();
