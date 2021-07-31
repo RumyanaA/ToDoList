@@ -1,11 +1,16 @@
 var UserService=require('./../services/UserService.js');
-
-const newUser = async (req, res, next) => {
+class usersController{
+static async newUser(req, res, next){
     var userData=req.body;
     
-    var token= await UserService.generateToken(userData);
+    var token= await UserService.tokenOnRegister(userData);
     
     res.send(token);
 };
-
-module.exports = {newUser};
+static async loginUser(req, res, next){
+    var userData=req.body;
+    var token = await UserService.tokenOnLogin(userData);
+    res.send(token);
+}
+}
+module.exports = usersController;

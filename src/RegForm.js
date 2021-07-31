@@ -50,13 +50,13 @@ class Reg extends React.Component{
          if(this.validation()){
          
           var userData=this.state;
-          var res = await axios.post('http://localhost:8081/userInfo', userData);
+          var res = await axios.post('http://localhost:8081/Register', userData);
           var token = res.data;
           const cookies = new Cookies();
-          var now=new Date();
-          var date=new Date(now.getTime()+2*60*60*1000);
+        //   var now=new Date();
+        //   var date=new Date(now.getTime()+2*60000);
           
-          cookies.set('userToekn', token,date);
+          cookies.set('userToekn', token);
           
           
          }

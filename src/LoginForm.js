@@ -1,8 +1,9 @@
 import React from "react";
 import InputField from './InputField';
 import Button from './Button';
-import ForgottenPassword from "./ForgottenPassword";
-class Login extends React.Component{
+import axios from 'axios';
+import CookiesJar from "./CookiesJar";
+class Login extends CookiesJar{
     constructor(props){
         super(props);
         
@@ -10,7 +11,8 @@ class Login extends React.Component{
         username: '',
         password: '',
         usernameError:'',
-        passwordError:''
+        passwordError:'',
+        userError:''
     };
     this.handleChange = this.handleChange.bind(this);
     this.submit = this.submit.bind(this);
@@ -41,6 +43,14 @@ handleChange(event) {
   submit(){
       if(this.validation()){
       var userData=this.state;
+      var res = await axios.post('http://localhost:8081/Login', userData);
+      var token = res.data;
+      if(token ==-1){
+          this.userError='User not found';
+          this.setState({userError});
+      }else{
+      super.setCookie('userToken', token);
+      }
       
         //login user
   }
@@ -58,7 +68,8 @@ handleChange(event) {
                 <span className="text-error">{this.state.usernameError}</span> 
                 <InputField className='login-input'  placeholder='password' name='password' onChange={this.handleChange} />
                 <span className="text-error">{this.state.passwordError}</span>
-                <Button   label="Login" onClick={this.submit}  />
+                <span className="text-error">{this.state.userError}</span>
+                <Button label="Login" onClick={this.submit}  />
                 {/* <ForgottenPassword onClick={this.props.onClick} /> */}
             </div>
             </div>   

@@ -16,5 +16,18 @@ class UsersModel {
         // db.close();
 
     }
+    static async verifyUser(userData){
+        try{
+            var result= await client.get().collection("Users").find(userData).toArray()
+            if(result.length==1){
+                return (result[0]._id);
+            }else{
+                return -1;
+            }
+        }
+        catch(e){
+            logger.error(e.message);
+        }
+    }
 }
 module.exports=UsersModel;
