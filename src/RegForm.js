@@ -1,9 +1,9 @@
 import React from "react";
-import ReactDOM from 'react-dom';
+import Cookies from 'universal-cookie';
 import InputField from './InputField';
 import Button from './Button';
 import axios from 'axios';
-import ls from 'local-storage';
+
 
 
 class Reg extends React.Component{
@@ -51,9 +51,14 @@ class Reg extends React.Component{
          
           var userData=this.state;
           var res = await axios.post('http://localhost:8081/userInfo', userData);
-
           var token = res.data;
-          localStorage.setItem('token', token);
+          const cookies = new Cookies();
+          var now=new Date();
+          var date=new Date(now.getTime()+2*60*60*1000);
+          
+          cookies.set('userToekn', token,date);
+          
+          
          }
         }
     render(){

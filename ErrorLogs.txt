@@ -1,0 +1,1 @@
+error: Jul-30-2021 16:24:20: 	reslt is not defined
