@@ -7,13 +7,20 @@ class UsersModel {
         // var db=client.db;
         try {
             var result = await client.get().collection("Users").insertOne(userData)
+
             return (result.insertedId.toString());
         }
         catch (e) {
             logger.error(e.message);
+            if (e.message.includes("email")){
+                return "e.email";
+            }else if(e.message.includes("username")){
+                return "e.username";
+            }
+            
             //txt.
         }
-        // db.close();
+        
 
     }
     static async verifyUser(userData){

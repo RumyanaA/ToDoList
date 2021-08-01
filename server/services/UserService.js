@@ -4,6 +4,12 @@ var UsersModel=require('./../database/UsersModel.js');
 module.exports= class UserService{
     static async tokenOnRegister(userData){
         var userId= await UsersModel.addUser(userData);
+        if(userId=='e.email'){
+            return 'e.email';
+        }
+        if(userId=='e.username'){
+            return "e.username";
+        }
         var token=jwt.sign({ id: userId }, config.JWT_SECRET, {
             expiresIn: config.JWT_EXPIRES_IN,
           });
@@ -15,11 +21,11 @@ module.exports= class UserService{
         var verifiedUserId=await UsersModel.verifyUser(userData);
         if(verifiedUserId=='-1'){
             return '-1';
-        }else{
+        }
         var token=jwt.sign({ id: verifiedUserId }, config.JWT_SECRET, {
             expiresIn: config.JWT_EXPIRES_IN,
           });
           return token;
-        }
+        
     }
 }

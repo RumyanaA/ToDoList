@@ -50,7 +50,7 @@ handleChange(event) {
       if(token =='-1'){
         //   this.userError='User not found';
           this.setState({
-              userError:'User not found'
+              userError:'Wrong username or password'
             });
       }else{
         this.setCookie('userLogToken', token);
