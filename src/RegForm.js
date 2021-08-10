@@ -3,12 +3,12 @@ import InputField from './InputField';
 import Button from './Button';
 import axios from 'axios';
 import CookiesJar from "./CookiesJar";
-
-
+import {withRouter} from 'react-router-dom';
 
 class Reg extends CookiesJar{
     constructor(props){
         super(props);
+        
         this.state={
             email:'',
             username:'',
@@ -64,7 +64,7 @@ class Reg extends CookiesJar{
                   emailError:'Email already exists',
                   passwordError:''
                 });
-            }else if(token='e.username'){
+            }else if(token=='e.username'){
                 this.setState({
                     emailError:'',
                     passwordError:'',
@@ -73,6 +73,10 @@ class Reg extends CookiesJar{
                 }else{
             this.setCookie('userLogToken', token);
             console.log(this.getCookie('userLogToken'));
+            
+                this.props.history.push('/todoList');
+             
+            
           }
           
           
@@ -99,4 +103,4 @@ class Reg extends CookiesJar{
         );
     }
 }
-export default Reg;
+export default withRouter(Reg);
