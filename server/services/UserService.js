@@ -28,4 +28,8 @@ module.exports= class UserService{
           return token;
         
     }
+    static async passwordReset(userData){
+        var result = await UsersModel.verifyUserEmail(userData);
+        return result;
+    }
 }

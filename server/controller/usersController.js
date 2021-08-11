@@ -12,5 +12,10 @@ static async loginUser(req, res, next){
     var token = await UserService.tokenOnLogin(userData);
     res.send(token);
 }
+static async generatePassword(req, res, next){
+    var userData=req.body
+    var response=await UserService.passwordReset(userData);
+    res.send(response);
+}
 }
 module.exports = usersController;

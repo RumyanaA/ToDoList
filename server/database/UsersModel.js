@@ -1,6 +1,8 @@
 const client=require('./../config/dbConnect');
 var logger = require('./../services/LoggingService.js');
 var bcrypt = require('bcryptjs');
+var generatePassword = require('password-generator');
+var EmailSender= require('./../services/EmailSender.js');
 class UsersModel {
    static async addUser(userData) {
 
@@ -39,6 +41,45 @@ class UsersModel {
                 }else{
                     return '-1';
                 }
+            }else{
+                return '-1';
+            }
+        }
+        catch(e){
+            logger.error(e.message);
+        }
+    }
+    static async verifyUserEmail(userData){
+        try{
+            var result= await client.get().collection("Users").find(userData).toArray()
+            if(result.length==1){
+                var newPassword=generatePassword();
+                const passwordHash = bcrypt.hashSync(newPassword, 10);
+                var encryptedPassword={
+                    $set:{
+                    'password': passwordHash
+                    }
+                }
+                try{
+                var updatedRes= await client.get().collection('Users').updateOne(userData,encryptedPassword)
+                    var mailData={
+                        to: userData.email,
+                        subject: 'Password recovery',
+                        text: 'Your new password is' + newPassword
+                    }
+                var response = EmailSender.sendEmail(mailData);
+                    if(response!='-1'){
+                        return 'email sent';
+                    }else{
+                        return '-1';
+                    }
+                }
+                catch(e){
+                    logger.error(e.message);
+                }
+                //update in database
+                //generate password
+               
             }else{
                 return '-1';
             }

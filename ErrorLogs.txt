@@ -15,3 +15,9 @@ error: Aug-01-2021 15:42:53: 	E11000 duplicate key error collection: ToDoList.Us
 error: Aug-01-2021 15:43:02: 	E11000 duplicate key error collection: ToDoList.Users index: ind_email dup key: { email: "a@b.bb" }
 error: Aug-10-2021 18:14:52: 	E11000 duplicate key error collection: ToDoList.Users index: ind_email dup key: { email: "hhh@ss.jw" }
 error: Aug-10-2021 18:15:54: 	E11000 duplicate key error collection: ToDoList.Users index: ind_email dup key: { email: "hhh@ss.jws" }
+error: Aug-11-2021 17:33:30: 	Invalid login: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials s7sm11144133edu.23 - gsmtp
+error: Aug-11-2021 17:43:49: 	Invalid login: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials gw24sm371259ejb.66 - gsmtp
+error: Aug-11-2021 17:45:06: 	Invalid login: 535 5.7.0 (#AUTH005) Too many bad auth attempts.
+error: Aug-11-2021 17:49:34: 	Invalid login: 535 5.7.0 (#AUTH005) Too many bad auth attempts.
