@@ -32,7 +32,7 @@ handleChange(event) {
     }else{
         this.setState({
          emailError:'',
-         message: 'Email has been sent'
+         message: 'An email has been sent with your new password. Check your spam folder if you do not see it.'
         });
 
     }
@@ -46,12 +46,12 @@ render(){
       Reset Password
     </div>
     <div className="box">
-        {/* onChange={this.handleChange} */}
-        
             <InputField className='login-input'  label='Enter your email' name='email'type='text' onChange={this.handleChange}  /> 
             <span className="text-error">{this.state.emailError}</span>
-            <span className="text-error">{this.state.message}</span>
             <Button   label="Reset" onClick={this.submit}  />
+            <div className='emailmessage' >
+                <span className="text-message">{this.state.message}</span>
+            </div>
 
             
         </div>

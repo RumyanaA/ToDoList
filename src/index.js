@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import todoList from './todoList';
+import Welcome from './EmailConfirmed';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -12,6 +13,7 @@ ReactDOM.render(
       <Switch>
     <Route exact path="/" component={App}/>
     <Route exact path="/todoList" component={todoList}/>
+    <Route path="/confirm/:confirmationCode" component={Welcome} />
     </Switch>
     </Router>
   </React.StrictMode>,

@@ -4,16 +4,38 @@ var bcrypt = require('bcryptjs');
 var generatePassword = require('password-generator');
 var EmailSender= require('./../services/EmailSender.js');
 class UsersModel {
-   static async addUser(userData) {
 
-        
-        // var db=client.db;
+   static async addUser(userData) {
         try {
+            //  .../activate?user=ygyyikyhky
+            //get(/activate',res,req){
+        //  var str=req.params
+        //find..
+            //}    
             const passwordHash = bcrypt.hashSync(userData.password, 10);
             userData.password=passwordHash;
-            var result = await client.get().collection("Users").insertOne(userData)
-
-            return (result.insertedId.toString());
+            var query={
+                email:userData.email,
+                username:userData.username,
+                password:userData.password,
+                status: 'pending',
+                uniqueStr:Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+            }
+            var result = await client.get().collection("Users").insertOne(query)
+            if(result.acknowledged==true){
+            var mailData={
+                to: userData.email,
+                subject: 'Email Confirmation',
+                html: `<h1>Email Confirmation</h1>
+                <h2>Hello ${userData.username}</h2>
+                <p>Thank you for subscribing. Please confirm your email by clicking on the following link</p>
+                <a href=http://localhost:3000/confirm/${query.uniqueStr}> Click here</a>
+                </div>`
+            }
+        var response = EmailSender.sendEmail(mailData);
+         return true;
+           }
+        // return (result.insertedId.toString());
         }
         catch (e) {
             logger.error(e.message);
@@ -22,12 +44,27 @@ class UsersModel {
             }else if(e.message.includes("username")){
                 return "e.username";
             }
-            
-            //txt.
         }
         
 
     }
+
+    static async activate(str){
+        
+        var query={
+            uniqueStr:str
+        }
+        var result = await client.get().collection("Users").find(query).toArray()
+        if(result.length==1){
+            try{
+            var updateStatus=await client.get().collection("Users").updateOne(query,{ $set:{status:'active'}})
+            return 'activated';
+            }catch(e){
+                logger.error(e.message);
+            }
+        }
+    }
+
     static async verifyUser(userData){
         try{
             var query={
@@ -49,6 +86,7 @@ class UsersModel {
             logger.error(e.message);
         }
     }
+
     static async verifyUserEmail(userData){
         try{
             var result= await client.get().collection("Users").find(userData).toArray()

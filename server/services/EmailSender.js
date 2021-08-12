@@ -14,7 +14,8 @@ class EmailSender{
             from: 'test.test19977@yahoo.com',
             to: mailData.to,
             subject: mailData.subject,
-            text: mailData.text
+            text: mailData.text,
+            html: mailData.html
           };
           try{
            var info=await transporter.sendMail(mailOptions);

@@ -16,7 +16,8 @@ class Reg extends CookiesJar{
             usernameError:'',
             emailError:'',
             passwordError:'',
-            userError:''
+            userError:'',
+            message:''
         };
         this.handleChange = this.handleChange.bind(this);
         this.submit = this.submit.bind(this);
@@ -56,23 +57,27 @@ class Reg extends CookiesJar{
                 password: this.state.password,
             }
           var res = await axios.post('http://localhost:8081/Register', userData);
-          var token = res.data;
-          if(token =='e.email'){
+          var response = res.data;
+          if(response =='e.email'){
             
               this.setState({
                   usernameError:'',
                   emailError:'Email already exists',
                   passwordError:''
                 });
-            }else if(token=='e.username'){
+            }else if(response=='e.username'){
                 this.setState({
                     emailError:'',
                     passwordError:'',
                     usernameError:'Username already exists'
                   });  
                 }else{
-            this.setCookie('userLogToken', token);
-            console.log(this.getCookie('userLogToken'));
+                    this.setState({
+                        emailError:'',
+                        passwordError:'',
+                        usernameError:'',
+                        message:'Confirmation email has been sent. If you do not see it, check your spam folder.'
+                      });  
             
                 this.props.history.push('/todoList');
              
@@ -95,8 +100,10 @@ class Reg extends CookiesJar{
                 <span className="text-error">{this.state.usernameError}</span> 
                 <InputField className='login-input'  placeholder='Password' name='password'type='password' onChange={this.handleChange} />
                 <span className="text-error">{this.state.passwordError}</span>
-                
                 <Button   label="Register" onClick={this.submit}  />
+                <div className='emailmessage' >
+                <span className="text-message">{this.state.message}</span>
+            </div>
             </div>
             </div>   
             
