@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import todoList from './todoList';
+import TodoList from './home/TodoList';
 import Welcome from './EmailConfirmed';
 
 ReactDOM.render(
@@ -12,7 +12,7 @@ ReactDOM.render(
     <Router>
       <Switch>
     <Route exact path="/" component={App}/>
-    <Route exact path="/todoList" component={todoList}/>
+    <Route  path="/todoList" component={TodoList}/>
     <Route path="/confirm/:confirmationCode" component={Welcome} />
     </Switch>
     </Router>

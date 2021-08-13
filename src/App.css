@@ -82,3 +82,43 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
+/* .layout{
+  width: 100%;
+} */
+.leftColumn{
+  /* display: block; */
+  border-right: 1px solid;
+  background-color: whitesmoke;
+  width: 20%;
+  height:100%;
+  position: fixed;
+  top: 0px;
+  box-shadow: 6px 0px 5px grey;
+}
+.rightColumn{
+  display: inline-block;
+  box-shadow: -6px 0px 5px grey;
+  background-color: lightgreen;
+  width: 20%;
+  height:100%;
+  position: fixed;
+  top: 0px;
+  border-left: 1px solid;
+}
+.Navli{
+  display:block;
+}
+.screen{
+  display: inline-block;
+  width: 60%;
+  margin-top: 40px;
+  margin-left: 320px;
+  
+  
+}
+.h1{
+  border-bottom: 6px solid red;
+  margin-left: 30%;
+  
+  
+}
