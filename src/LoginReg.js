@@ -17,7 +17,7 @@ class LoginReg extends React.Component {
         this.showLogBox = this.showLogBox.bind(this);
         this.showRegBox = this.showRegBox.bind(this);
         this.passwordForm= this.passwordForm.bind(this);
-        this.sendPassword=this.sendPassword.bind(this);
+        
     }
     showLogBox() {
         this.setState({ isLoginOpen: true, isRegisterOpen: false,isPassResetOpen: false });
@@ -29,36 +29,30 @@ class LoginReg extends React.Component {
     passwordForm(){
         this.setState({ isLoginOpen: false, isRegisterOpen: false, isPassResetOpen: true });
     }
-    sendPassword(){
-        //generated password from back-end
-        var userData=this.state;
-    userData.generatedPassword='aspirin3';
-    this.setState(userData);
-        this.setState({ isLoginOpen: true, isRegisterOpen: false,isPassResetOpen: false });
-    }
+    
     render() {
 
         if (this.state.isLoginOpen) {
             return (
                 <div className='log-form'>
-                    <Button label="Login" onClick={this.showLogBox} />
-                    <Button label="Register" onClick={this.showRegBox} />
+                    <Button className="button" label="Login" onClick={this.showLogBox} />
+                    <Button className="buttonReg" label="Register" onClick={this.showRegBox} />
                     <Login onClick={this.passwordForm}/>
                     <ForgottenPassword onClick={this.passwordForm} />
                 </div>)
         } else if(this.state.isRegisterOpen){
             return (
                 <div className='log-form'>
-                    <Button label="Login" onClick={this.showLogBox} />
-                    <Button label="Register" onClick={this.showRegBox} />
+                    <Button className="button" label="Login" onClick={this.showLogBox} />
+                    <Button className="buttonReg" label="Register" onClick={this.showRegBox} />
                     <Reg />
                 </div>)
         } else if(this.state.isPassResetOpen){
             return (
                 <div className='log-form'>
-                    <Button label="Login" onClick={this.showLogBox} />
-                    <Button label="Register" onClick={this.showRegBox} />
-                    <PasswordForm onClick={this.sendPassword} />
+                    <Button className="button" label="Login" onClick={this.showLogBox} />
+                    <Button className="buttonReg" label="Register" onClick={this.showRegBox} />
+                    <PasswordForm />
                 </div>)
         }
 

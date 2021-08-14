@@ -75,7 +75,7 @@ class Login extends CookiesJar {
                     <InputField className='login-input' placeholder='password' name='password' type='password' onChange={this.handleChange} />
                     <span className="text-error">{this.state.passwordError}</span>
                     <span className="text-error">{this.state.userError}</span>
-                    <Button label="Login" onClick={this.submit} />
+                    <Button className="button" label="Login" onClick={this.submit} />
                     {/* <ForgottenPassword onClick={this.props.onClick} /> */}
                 </div>
             </div>

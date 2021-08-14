@@ -48,7 +48,7 @@ render(){
     <div className="box">
             <InputField className='login-input'  label='Enter your email' name='email'type='text' onChange={this.handleChange}  /> 
             <span className="text-error">{this.state.emailError}</span>
-            <Button   label="Reset" onClick={this.submit}  />
+            <Button className="button" label="Reset" onClick={this.submit}  />
             <div className='emailmessage' >
                 <span className="text-message">{this.state.message}</span>
             </div>

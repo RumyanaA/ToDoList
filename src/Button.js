@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 function Button(props) {
     return (
-      <button className="button" onClick={props.onClick}>
+      <button className={props.className} onClick={props.onClick}>
         {props.label}
       </button>
     );

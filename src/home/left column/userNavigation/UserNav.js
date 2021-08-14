@@ -32,13 +32,13 @@ class UserNav extends Component{
         
     }
     render(){
-        return(<ul>
-            <li className='Navli'><Button label="Notifications" onClick={this.notifications} /></li>
-           <li className='Navli'> <Button label="Today" onClick={this.today} /></li>
-            <li className='Navli'><Button label="Calendar" onClick={this.calendar} /></li>
-           <li className='Navli'> <Button label="Important" onClick={this.important} /></li>
-           <li className='Navli'> <Button label="Completed" onClick={this.completed} /></li>
-           <li className='Navli'> <Button label="Trash" onClick={this.trash} /></li>
+        return(<ul className='ul'>
+            <li className='Navli'><Button className='navBarButton' label="Notifications" onClick={this.notifications} /></li>
+           <li className='Navli'> <Button className='navBarButton' label="Today" onClick={this.today} /></li>
+            <li className='Navli'><Button className='navBarButton' label="Calendar" onClick={this.calendar} /></li>
+           <li className='Navli'> <Button className='navBarButton' label="Important" onClick={this.important} /></li>
+           <li className='Navli'> <Button className='navBarButton' label="Completed" onClick={this.completed} /></li>
+           <li className='Navli'> <Button className='navBarButton' label="Trash" onClick={this.trash} /></li>
             
             </ul>
         )
