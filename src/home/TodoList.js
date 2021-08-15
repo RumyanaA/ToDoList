@@ -8,7 +8,7 @@ export default class TodoList extends Component {
 
     render = () => {
         return (
-            <div classname='layout'>
+            <div className='layout'>
                 <Switch>
                     <Route path="/todoList/:component" component={Notifications} />
 

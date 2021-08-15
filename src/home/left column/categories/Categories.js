@@ -43,7 +43,7 @@ class Categories extends Component{
         this.setState(catData);
     }
 render(){
-    return(<div>
+    return(<div className='catComponet'>
         <h4 className='catHeader'>Categories</h4>
         <div className='categoriesBox'>
         <ul>

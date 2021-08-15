@@ -35,7 +35,7 @@ class LoginReg extends React.Component {
         if (this.state.isLoginOpen) {
             return (
                 <div className='log-form'>
-                    <Button className="button" label="Login" onClick={this.showLogBox} />
+                    <Button className="buttons" label="Login" onClick={this.showLogBox} />
                     <Button className="buttonReg" label="Register" onClick={this.showRegBox} />
                     <Login onClick={this.passwordForm}/>
                     <ForgottenPassword onClick={this.passwordForm} />
@@ -43,14 +43,14 @@ class LoginReg extends React.Component {
         } else if(this.state.isRegisterOpen){
             return (
                 <div className='log-form'>
-                    <Button className="button" label="Login" onClick={this.showLogBox} />
+                    <Button className="buttons" label="Login" onClick={this.showLogBox} />
                     <Button className="buttonReg" label="Register" onClick={this.showRegBox} />
                     <Reg />
                 </div>)
         } else if(this.state.isPassResetOpen){
             return (
                 <div className='log-form'>
-                    <Button className="button" label="Login" onClick={this.showLogBox} />
+                    <Button className="buttons" label="Login" onClick={this.showLogBox} />
                     <Button className="buttonReg" label="Register" onClick={this.showRegBox} />
                     <PasswordForm />
                 </div>)

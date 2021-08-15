@@ -97,7 +97,7 @@ class Reg extends CookiesJar {
                     <span className="text-error">{this.state.usernameError}</span>
                     <InputField className='login-input' placeholder='Password' name='password' type='password' onChange={this.handleChange} />
                     <span className="text-error">{this.state.passwordError}</span>
-                    <Button className="button" label="Register" onClick={this.submit} />
+                    <Button className="buttons" label="Register" onClick={this.submit} />
                     <div className='emailmessage' >
                         <span className="text-message">{this.state.message}</span>
                     </div>
