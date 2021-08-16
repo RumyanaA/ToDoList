@@ -19,9 +19,9 @@ module.exports = class UserService {
         if (verifiedUserId == '-1') {
             return '-1';
         }
-        var token = jwt.sign({ id: verifiedUserId }, config.JWT_SECRET, {
+        var token = jwt.sign({ "id": verifiedUserId }, config.JWT_SECRET/*, {
             expiresIn: config.JWT_EXPIRES_IN,
-        });
+        }*/);
         return token;
 
     }
