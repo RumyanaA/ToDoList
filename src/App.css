@@ -198,6 +198,7 @@
 }
 .Navli{
   display:block;
+  cursor: pointer;
 }
 .screen{
   display: inline-block;
@@ -277,3 +278,15 @@
   
   margin-bottom: 10px;
 }
+.calendar{
+  position: relative;
+  top: 50px;
+  left: 330px;
+  width: 750px;
+  height: 600px;
+  
+}
+/* .fc td{
+ 
+/* color: #0a0101; 
+} */

@@ -23,7 +23,7 @@ class UserNav extends Component{
 
     }
     calendar(){
-
+        this.props.history.push('/todoList/calendar');
     }
     important(){
 
