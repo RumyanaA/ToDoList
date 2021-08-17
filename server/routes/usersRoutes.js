@@ -7,4 +7,5 @@ router.post('/Login', userController.loginUser);
 router.post('/ResetPassword', userController.generatePassword);
 router.get('/activate/:confirmationCode',userController.activate);
 router.post('/addCategory', CategoryController.newCategory);
+router.get('/getCatName',CategoryController.getCategories);
 module.exports = router;

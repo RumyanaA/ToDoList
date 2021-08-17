@@ -38,3 +38,5 @@ error: Aug-16-2021 19:06:44: 	Call connect first!
 error: Aug-16-2021 19:06:44: 	Cannot read property 'collection' of null
 error: Aug-16-2021 19:58:14: 	jwt expired
 error: Aug-16-2021 19:59:17: 	jwt expired
+error: Aug-17-2021 16:54:30: 	jwt must be a string
+error: Aug-17-2021 16:55:05: 	jwt must be a string

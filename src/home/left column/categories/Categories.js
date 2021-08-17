@@ -3,6 +3,7 @@ import React from "react";
 import { Component } from "react";
 import Button from '../../../Button';
 import InputField from "../../../InputField";
+import CatBox from "./CategoriesBox";
 import CookiesJar from "../../../CookiesJar";
 class Categories extends CookiesJar {
     constructor(props) {
@@ -64,13 +65,7 @@ class Categories extends CookiesJar {
     }
     render() {
         return (<div className='catComponet'>
-            <h4 className='catHeader'>Categories</h4>
-            <div className='categoriesBox'>
-                <ul>
-                    {this.state.catArray.map((item, i) => <li key={i} name={item.name} />)}
-                </ul>
-
-            </div>
+            <CatBox/>
             <Button className='addCat' label="+ Add Category" onClick={this.addCategory} />
             <div className='addcategoryBox' hidden={this.state.hideCategoryDiv}>
                 <InputField value={this.state.name} className='categoryName' placeholder='name' label='' name='name' type='text' onChange={this.handleChange} />
