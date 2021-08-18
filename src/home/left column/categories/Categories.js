@@ -12,24 +12,18 @@ class Categories extends CookiesJar {
         this.handleChange = this.handleChange.bind(this);
         this.saveCategory = this.saveCategory.bind(this);
         this.cancelCategory = this.cancelCategory.bind(this);
+        this.catData={};
         this.state = {
             hideCategoryDiv: true,
             name: '',
             note: '',
             catArray: []
         }
-        this.getCat()
+        
 
 
     }
-    async getCat() {
-        // var res = await axios.get('/getCatNameAndId')
-        // for(var i=0;i<res.data.length-1;i++){
-        //     this.setState({catArray: this.catArray.push(res.data.name[i])})
-        // }
-        // var catId = res.data._id;
-
-    }
+    
     addCategory() {
         this.setState({ hideCategoryDiv: false })
     }
@@ -41,11 +35,17 @@ class Categories extends CookiesJar {
         })
     }
     async saveCategory() {
+        
         var token = this.getCookie('userLogToken');
+        
         var catInfo = {
             name: this.state.name,
             note: this.state.note,
             createdby: token.token
+        }
+        this.catData={
+            name: catInfo.name,
+            note: catInfo.note
         }
         var result = await axios.post('http://localhost:8081/addCategory', catInfo)
         var categoryId = result.data;
@@ -58,6 +58,7 @@ class Categories extends CookiesJar {
 
 
     }
+    
     handleChange(event) {
         var catData = this.state;
         catData[event.target.name] = event.target.value;
@@ -65,7 +66,7 @@ class Categories extends CookiesJar {
     }
     render() {
         return (<div className='catComponet'>
-            <CatBox/>
+            <CatBox categoryName={this.catData.name}/>
             <Button className='addCat' label="+ Add Category" onClick={this.addCategory} />
             <div className='addcategoryBox' hidden={this.state.hideCategoryDiv}>
                 <InputField value={this.state.name} className='categoryName' placeholder='name' label='' name='name' type='text' onChange={this.handleChange} />
