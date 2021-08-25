@@ -5,6 +5,7 @@ import Button from '../../../Button';
 import InputField from "../../../InputField";
 import CatBox from "./CategoriesBox";
 import CookiesJar from "../../../CookiesJar";
+import Storage from "../../../Storage";
 class Categories extends CookiesJar {
     constructor(props) {
         super(props);
@@ -45,11 +46,13 @@ class Categories extends CookiesJar {
         }
         this.catData={
             name: catInfo.name,
-            note: catInfo.note
+            note: catInfo.note,
+            categoryId: ''
         }
         var result = await axios.post('http://localhost:8081/addCategory', catInfo)
-        var categoryId = result.data;
-        this.setCookie(catInfo.name, categoryId);
+        this.catData.categoryId=result.data;
+        Storage.setItem(this.catData, 'categories');
+        this.setCookie(catInfo.name, this.catData.categoryId);
         this.setState({
             name: '',
             note: '',

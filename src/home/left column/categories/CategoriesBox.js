@@ -31,12 +31,8 @@ class CatBox extends CookiesJar {
 
         if(this.props.categoryName!=undefined){
             this.hasCatName=true
-            console.log(this.props.categoryName);
-            console.log(this.state.hasCatName);
         }else{
             this.hasCatName=false
-            console.log( this.props.categoryName);
-            console.log(this.hasCatName);
         }
       }
   

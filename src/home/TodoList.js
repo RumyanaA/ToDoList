@@ -12,8 +12,6 @@ export default class TodoList extends Component {
             <div className='layout'>
                 <Switch>
                     <Route  path="/todoList/:component" component={Middle} />
-
-
                 </Switch>
 
                 <div className='leftColumn'><LeftColumn /></div>

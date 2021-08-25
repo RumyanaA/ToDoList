@@ -5,6 +5,7 @@ class Storage {
 
     static setItem(item, fieldName){
         this[fieldName].push(item)
+        
 
     }
 
