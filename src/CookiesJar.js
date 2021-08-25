@@ -6,8 +6,8 @@ class CookiesJar extends React.Component {
     constructor(props) {
         super(props);
     }
-     setCookie = (key, value) => {
-        cookies.set(key, value)
+     setCookie = (key, value, expire) => {
+        cookies.set(key, value, {expires:expire})
     }
      getCookie = (key) => {
         return cookies.get(key)

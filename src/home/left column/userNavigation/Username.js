@@ -5,8 +5,8 @@ import { withRouter } from 'react-router-dom';
 import CookiesJar from "../../../CookiesJar";
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
-import {BsPeopleCircle} from 'react-icons/bs';
-import {BsGear} from 'react-icons/bs';
+import { BsPeopleCircle } from 'react-icons/bs';
+import { BsGear } from 'react-icons/bs';
 
 class Username extends CookiesJar {
     container = React.createRef();
@@ -17,6 +17,7 @@ class Username extends CookiesJar {
         };
         this.username = '';
         this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.logout = this.logout.bind(this);
         this.getName()
         this.handleClickOutside = this.handleClickOutside.bind(this);
     }
@@ -48,22 +49,31 @@ class Username extends CookiesJar {
             });
         }
     };
+    logout() {
+        var date = new Date();
+        date.setDate(date.getDate() - 1);
+        var expiredCookie = this.getCookie('userLogToken');
+        this.setCookie('userLogToken', expiredCookie, date)
+        this.props.history.push('/');
+
+    }
     render() {
         return (
             <div className='user'>
-                <p className='userSet'><BsPeopleCircle className='userCircle'/>{this.username}</p>
+                <p className='userSet'><BsPeopleCircle className='userCircle' />{this.username}</p>
                 <div className="App">
                     <div className="container" ref={this.container}>
                         <button type="button" class="button" onClick={this.handleButtonClick}>
-                        <  BsGear className='bsGear'/>
+                            <  BsGear className='bsGear' />
                         </button>
                         {this.state.open && (
                             <div class="dropdown">
                                 <ul className='dropdownUL'>
-                                    <li className ='lis'>My Profile</li>
+                                    <li className='lis'> <Button label='Logout' onClick={this.logout} /></li>
+                                    <li className='lis'>My Profile</li>
                                     <li className='lis'>Settings</li>
                                     <li className='lis'>Support</li>
-                                    <li className='lis'>Logout</li>
+                                    {/* <li className='lis'>Logout</li> */}
                                 </ul>
                             </div>
                         )}
@@ -73,4 +83,4 @@ class Username extends CookiesJar {
         )
     }
 }
-export default Username;
+export default withRouter(Username);

@@ -58,7 +58,7 @@ class Login extends CookiesJar {
                     token: token,
                     username: this.state.username
                 }
-                this.setCookie('userLogToken', userObj);
+                this.setCookie('userLogToken', userObj,'');
                 this.props.history.push('/todoList');
             }
 

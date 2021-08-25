@@ -47,12 +47,11 @@ class Categories extends CookiesJar {
         this.catData={
             name: catInfo.name,
             note: catInfo.note,
-            categoryId: ''
+            id: ''
         }
         var result = await axios.post('http://localhost:8081/addCategory', catInfo)
-        this.catData.categoryId=result.data;
+        this.catData.id=result.data;
         Storage.setItem(this.catData, 'categories');
-        this.setCookie(catInfo.name, this.catData.categoryId);
         this.setState({
             name: '',
             note: '',

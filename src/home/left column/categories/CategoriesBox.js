@@ -1,17 +1,14 @@
 import axios from "axios";
 import React from "react";
-import { Component } from "react";
-import Button from '../../../Button';
-import InputField from "../../../InputField";
 import CookiesJar from "../../../CookiesJar";
+import Storage from "../../../Storage";
 
 class CatBox extends CookiesJar {
     constructor(props) {
         super(props);
         this.hasCatName= false;
         this.state={
-            categories: [],
-            
+            categories: [],    
         }
         
         
@@ -24,6 +21,7 @@ class CatBox extends CookiesJar {
         };
         var res = await axios.get('http://localhost:8081/getCatName', config)
         var categories = res.data;
+        Storage.setItem(categories,'categories');
         this.setState({categories: categories})
       }
 
