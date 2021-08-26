@@ -6,11 +6,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RightColumn from './right column/RightColumn';
 import Middle from './mid column/middle';
 export default class TodoList extends Component {
-
+    
     render = () => {
         return (
             <div className='layout'>
                 <Switch>
+                    <Route exact path='/todoList' component={Calendar}/>
                     <Route  path="/todoList/:component" component={Middle} />
                 </Switch>
 

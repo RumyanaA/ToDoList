@@ -15,6 +15,10 @@ class Storage {
         return result;
 
     }
+    static getAll(key,fieldName){
+        var result=this[fieldName].map(item => item[key]);
+        return result;
+    }
   
     static updateItem(key, value,keyToUpdate, updateValue, fieldName){
         for(var i=0;i<this[fieldName].length; i++){

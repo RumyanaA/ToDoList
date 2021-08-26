@@ -115,7 +115,7 @@
 .rightColumn{
   display: inline-block;
   box-shadow: -6px 0px 5px grey;
-  background-color: lightgreen;
+  background-color: whitesmoke;
   width: 20%;
   height:100%;
   position: fixed;
@@ -286,7 +286,11 @@
   height: 600px;
   
 }
-/* .fc td{
- 
-/* color: #0a0101; 
-} */
+.input-with-hint {
+  border: 0.9px solid #888;
+  padding: 0.5em 1em;
+  border-radius: 0.2em;
+  font-size: 1em;
+  color: #333;
+  
+}

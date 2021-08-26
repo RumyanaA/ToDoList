@@ -21,7 +21,9 @@ class CatBox extends CookiesJar {
         };
         var res = await axios.get('http://localhost:8081/getCatName', config)
         var categories = res.data;
-        Storage.setItem(categories,'categories');
+        for(var i=0;i<categories.length;i++){
+            Storage.setItem(categories[i], 'categories')
+        }
         this.setState({categories: categories})
       }
 

@@ -40,3 +40,5 @@ error: Aug-16-2021 19:58:14: 	jwt expired
 error: Aug-16-2021 19:59:17: 	jwt expired
 error: Aug-17-2021 16:54:30: 	jwt must be a string
 error: Aug-17-2021 16:55:05: 	jwt must be a string
+error: Aug-25-2021 17:03:14: 	E11000 duplicate key error collection: ToDoList.Users index: ind_email dup key: { email: "cegeuceuwella-8564@yopmail.com" }
+error: Aug-25-2021 17:13:13: 	Cannot read property 'slice' of undefined
