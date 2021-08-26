@@ -14,6 +14,7 @@ class SelectCategory extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.getStoredCat = this.getStoredCat.bind(this);
+        this.onFillOption=this.onFillOption.bind(this);
     }
     getStoredCat() {
         var categories = Storage.getAll('name', 'categories');
@@ -23,8 +24,11 @@ class SelectCategory extends Component {
         this.setState({
             category: event.target.value
         });
-        this.props.getCategory(this.state.category);
+        
 
+    }
+    onFillOption(data){
+        this.props.getCategory('category', data);
     }
     componentDidMount() {
         this.getStoredCat();
@@ -32,7 +36,7 @@ class SelectCategory extends Component {
     render() {
         return (
             <div>
-                <Hint options={this.state.hintData} allowTabFill >
+                <Hint options={this.state.hintData} allowTabFill onFill={this.onFillOption} >
                     <input className='input-with-hint' name='category' type='text' onChange={this.handleChange}
                     />
                 </Hint>

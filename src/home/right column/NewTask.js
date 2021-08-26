@@ -5,6 +5,7 @@ import InputField from "../../InputField";
 import { Hint } from "react-autocomplete-hint";
 import SelectCategory from "./SelectCategory";
 import Button from "../../Button";
+import Checkbox from "../../checkbox";
 import Storage from "../../Storage";
 
 class NewTask extends Component {
@@ -20,23 +21,29 @@ class NewTask extends Component {
         this.submit = this.submit.bind(this);
         this.cancel = this.cancel.bind(this);
         this.getCategory = this.getCategory.bind(this);
-        
+        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+
 
     }
+    handleCheckboxChange = event =>
+    this.setState({ important: event.target.checked })
     
+
     handleChange(event) {
         var userData = this.state;
         userData[event.target.name] = event.target.value;
         this.setState(userData);
     }
-    getCategory(data){
-        this.setState({category: data})
-        
-    }
-    async submit(){
+    getCategory(field,data) {
+        // var oldState= this.state;
+        // oldState[field]=data;
+        this.setState({[field]:data});
 
     }
-    cancel(){
+     submit() {
+        console.log(this.state.category)
+    }
+    cancel() {
         var MY_TOPIC = 'Render topic';
         PubSub.publish(MY_TOPIC, 'cancel task');
     }
@@ -46,17 +53,23 @@ class NewTask extends Component {
     render() {
         {
             return (
-                <div>
-                <InputField placeholder='Task name' label='' name='taskName' type='text' onChange={this.handleChange} />
-                <InputField placeholder='Task description' label='' name='taskDescr' type='text' onChange={this.handleChange} />
-               
-                <SelectCategory getCategory={this.getCategory}/>
-                
-                <Button className="" label="Save" onClick={this.submit} />
-                <Button className="" label="Cancel" onClick={this.cancel} />
+                <div className='createTask'>
+                    <InputField placeholder='Task name' label='' name='taskName' type='text' onChange={this.handleChange} />
+                    <InputField placeholder='Task description' label='' name='taskDescr' type='text' onChange={this.handleChange} />
+
+                    <SelectCategory getCategory={this.getCategory} />
+                    <label>
+          <Checkbox name='important'
+            checked={this.state.important}
+            onChange={this.handleCheckboxChange}
+          />
+          <span>Important</span>
+        </label>
+                        <Button className="manageTask" label="Save" onClick={this.submit} />
+                        <Button className="manageTask" label="Cancel" onClick={this.cancel} />
                 </div>
-            )
+                    )
         }
     }
 }
-export default NewTask;
+                    export default NewTask;
