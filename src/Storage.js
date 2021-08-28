@@ -2,6 +2,7 @@ class Storage {
     static categories=[];
     static tasks=[];
     static notifications=[];
+    static events=[];
 
     static setItem(item, fieldName){
         this[fieldName].push(item)
@@ -17,6 +18,10 @@ class Storage {
     }
     static getAll(key,fieldName){
         var result=this[fieldName].map(item => item[key]);
+        return result;
+    }
+    static getField(fieldName){
+        var result=this[fieldName];
         return result;
     }
   

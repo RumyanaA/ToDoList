@@ -32,7 +32,16 @@ class NewTask extends Component {
         this.setState({ [field]: data });
     }
     submit() {
-        console.log(this.state.dueDate)
+        var calendarEvent = {
+            title: this.state.taskName,
+            start: this.state.dueDate,
+            allDay: true
+        }
+        
+        var MY_TOPIC = 'Add Event';
+        PubSub.publish(MY_TOPIC, calendarEvent);
+
+        
     }
     cancel() {
         var MY_TOPIC = 'Render topic';

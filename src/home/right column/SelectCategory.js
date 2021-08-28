@@ -9,7 +9,6 @@ class SelectCategory extends Component {
         super(props);
         this.state = {
             hintData: [],
-
             category: ''
         }
         this.handleChange = this.handleChange.bind(this);

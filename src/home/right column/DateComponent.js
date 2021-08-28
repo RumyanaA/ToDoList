@@ -2,6 +2,7 @@ import React from "react";
 import { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 
 class DateComponent extends Component{
     constructor(props){
@@ -13,7 +14,7 @@ class DateComponent extends Component{
     }
     handleDateChange(date){
         this.setState({startDate: date});
-        this.props.getData('dueDate', date.toString());
+        this.props.getData('dueDate', moment(date).format("YYYY-MM-DD"));
     }
     render(){
         return(
@@ -22,12 +23,13 @@ class DateComponent extends Component{
             selected={this.state.startDate} 
             onChange={this.handleDateChange}
             calendarClassName="rasta-stripes"
-            showTimeSelect
-            timeFormat="HH:mm"
-              timeIntervals={30}
-              timeCaption='time'
+            // showTimeSelect
+            // timeFormat="HH:mm"
+            //   timeIntervals={30}
+            //   timeCaption='time'
             name="startDate"
-            dateFormat="MMMM d, yyyy h:mm aa">            
+            // dateFormat="MMMM d, yyyy h:mm aa"
+            dateFormat="MMMM d, yyyy">            
             </DatePicker>
         )
     }

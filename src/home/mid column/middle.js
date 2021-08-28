@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import { withRouter } from 'react-router-dom';
-import Calendar from "./calendar";
+import CalendarComponent from "./calendarComponent";
 import Notifications from "./notifications";
 class Middle extends Component{
     constructor(props){
@@ -18,7 +18,7 @@ class Middle extends Component{
         //     toRender=<Notifications/>
         // }
         if(this.props.match.params.component=='calendar'){
-            toRender=<Calendar/>
+            toRender=<CalendarComponent/>
         }
         // if(this.urlParam=='notifications'){
         //     toRender=<Notifications/>
