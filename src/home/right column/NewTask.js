@@ -35,17 +35,17 @@ class NewTask extends Component {
         var calendarEvent = {
             title: this.state.taskName,
             start: this.state.dueDate,
-            allDay: true
+            allDay: false
         }
         
         var MY_TOPIC = 'Add Event';
-        PubSub.publish(MY_TOPIC, calendarEvent);
+        PubSub.publish(MY_TOPIC, calendarEvent); //publisher, goes to calendarComponent, rendering events
 
         
     }
     cancel() {
         var MY_TOPIC = 'Render topic';
-        PubSub.publish(MY_TOPIC, 'cancel task');
+        PubSub.publish(MY_TOPIC, 'cancel task'); //publisher, goes to right column, rendering default
     }
 
     render() {

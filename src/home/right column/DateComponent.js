@@ -14,7 +14,7 @@ class DateComponent extends Component{
     }
     handleDateChange(date){
         this.setState({startDate: date});
-        this.props.getData('dueDate', moment(date).format("YYYY-MM-DD"));
+        this.props.getData('dueDate', moment(date).format("YYYY-MM-DDTHH:mm"));
     }
     render(){
         return(
@@ -23,13 +23,12 @@ class DateComponent extends Component{
             selected={this.state.startDate} 
             onChange={this.handleDateChange}
             calendarClassName="rasta-stripes"
-            // showTimeSelect
-            // timeFormat="HH:mm"
-            //   timeIntervals={30}
-            //   timeCaption='time'
+            showTimeSelect
+            timeFormat="HH:mm"
+              timeIntervals={30}
+              timeCaption='time'
             name="startDate"
-            // dateFormat="MMMM d, yyyy h:mm aa"
-            dateFormat="MMMM d, yyyy">            
+            dateFormat="MMMM d, yyyy h:mm aa">            
             </DatePicker>
         )
     }

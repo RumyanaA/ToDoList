@@ -24,7 +24,7 @@ class Middle extends Component{
         //     toRender=<Notifications/>
         // }
         return (
-            <div>
+            <div >
             {toRender}
             </div>
         );

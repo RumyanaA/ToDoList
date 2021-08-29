@@ -18,7 +18,7 @@ import Button from '../../Button';
    }
    Events;
   
-mySubscriber(msg,data){
+mySubscriber(msg,data){ //function for publishing
   
     var oldState=this.state;
     oldState.event.push(data);
@@ -30,10 +30,10 @@ mySubscriber(msg,data){
 
    addTask(){
     var MY_TOPIC = 'Render topic';
-    PubSub.publish(MY_TOPIC, 'create task');
+    PubSub.publish(MY_TOPIC, 'create task'); //publisher 
    }
    componentDidMount() {
-    PubSub.subscribe('Add Event', this.mySubscriber);
+    PubSub.subscribe('Add Event', this.mySubscriber); //subscriber to submit button on New Task component
 }
   render() {
     return (
@@ -41,14 +41,24 @@ mySubscriber(msg,data){
       <FullCalendar
         plugins={[ dayGridPlugin, timeGridPlugin, listPlugin ]}
         initialView="dayGridMonth"
+        timeFormat={
+          'hh:mm A'
+        }
+        eventTimeFormat= {{
+          hour: "numeric",
+          minute: "2-digit",
+          meridiem: "short",
+        }}
         events={[...this.state.event]}
         headerToolbar={{
           left: 'prev,next today',
           center:'title',
           right:'dayGridMonth,timeGridWeek,dayGridDay,listWeek'
         }}
-        aspectRatio={2}
+        aspectRatio={1}
         height={600}
+        width={400}
+        
       />
       <Button  label="add Task" onClick={this.addTask}/>
       </div>
