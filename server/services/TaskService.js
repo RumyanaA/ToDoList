@@ -17,5 +17,18 @@ class TaskService{
        
 
     }
+    static async getCreatedby(auth){
+        
+        try{
+            // var token=auth.slice(7);
+            var payload = jwt.verify(auth.slice(7), config.JWT_SECRET);
+            
+            var result = await TaskModel.getTasks(payload.id);
+            return result;
+
+        }catch(e){
+            logger.error(e.message);
+        }
+    }
 }
 module.exports = TaskService;

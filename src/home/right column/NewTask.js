@@ -19,8 +19,9 @@ class NewTask extends CookiesJar {
             important: false,
             dueDate: '',
             category: '',
-            categoryError:'',
-            dateError:''
+            allDay: false,
+            categoryError: '',
+            dateError: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.submit = this.submit.bind(this);
@@ -53,33 +54,35 @@ class NewTask extends CookiesJar {
 
     }
     async submit() {
-        if(this.validation()){
-        var categoryId=Storage.getItem('name',this.state.category,'categories') //task data
-        var token = this.getCookie('userLogToken');                             //to insert
-        var taskData= {                                                         //in database
-            taskName: this.state.taskName,
-            taskDescr: this.state.taskDescr,
-            important: this.state.important,
-            dueDate: this.state.dueDate,
-            category: this.state.category,
-        }                                              
-        taskData.createdby=token.token;                                         
-        taskData.categoryId=categoryId.id;
-        var result = await axios.post('http://localhost:8081/saveNewTask', taskData)
-        taskData.id=result.data;
-        delete taskData.createdby;                  //remove object createdby property before inserting into storage
-        Storage.setItem(taskData,'tasks')
-        var calendarEvent = {                       //task data to send to calendar as event
-            title: this.state.taskName,             
-            start: this.state.dueDate,
-            allDay: false
+        if (this.validation()) {
+            var categoryId = Storage.getItem('name', this.state.category, 'categories') //task data
+            var token = this.getCookie('userLogToken');                             //to insert
+            var taskData = {                                                         //in database
+                taskName: this.state.taskName,
+                taskDescr: this.state.taskDescr,
+                important: this.state.important,
+                dueDate: this.state.dueDate,
+                category: this.state.category,
+                allDay: this.state.allDay
+            }
+            taskData.createdby = token.token;
+            taskData.categoryId = categoryId.id;
+            var result = await axios.post('http://localhost:8081/saveNewTask', taskData)
+            taskData.id = result.data;
+            delete taskData.createdby;                  //remove object createdby property before inserting into storage
+            Storage.setItem(taskData, 'tasks')
+            var calendarEvent = {                       //task data to send to calendar as event
+                title: this.state.taskName,
+                start: this.state.dueDate,
+                allDay: false
+            }
+
+            var MY_TOPIC = 'Add Event';
+            PubSub.publish(MY_TOPIC, calendarEvent); //publisher, goes to calendarComponent, rendering events
+
+            var MYotherTOPIC = 'Render topic';
+            PubSub.publish(MYotherTOPIC, 'cancel task');
         }
-        
-        var MY_TOPIC = 'Add Event';
-        PubSub.publish(MY_TOPIC, calendarEvent); //publisher, goes to calendarComponent, rendering events
-        var MYotherTOPIC = 'Render topic';       
-        PubSub.publish(MYotherTOPIC, 'cancel task');
-    }
     }
     cancel() {
         var MY_TOPIC = 'Render topic';

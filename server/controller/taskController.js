@@ -7,5 +7,10 @@ class taskController{
 
         res.send(response);
     };
+    static async getTasks(req, res, next){
+        var auth=req.headers.authorization;
+        var response = await TaskService.getCreatedby(auth);
+        res.send(response);
+    }
 }
 module.exports = taskController;

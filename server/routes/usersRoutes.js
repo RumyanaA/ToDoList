@@ -10,4 +10,5 @@ router.get('/activate/:confirmationCode',userController.activate);
 router.post('/addCategory', CategoryController.newCategory);
 router.get('/getCatName',CategoryController.getCategories);
 router.post('/SaveNewTask', taskController.newTask);
+router.get('/getAllTasks', taskController.getTasks);
 module.exports = router;
