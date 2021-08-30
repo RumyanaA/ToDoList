@@ -18,7 +18,9 @@ class NewTask extends CookiesJar {
             taskDescr: '',
             important: false,
             dueDate: '',
-            category: ''
+            category: '',
+            categoryError:'',
+            dateError:''
         }
         this.handleChange = this.handleChange.bind(this);
         this.submit = this.submit.bind(this);
@@ -33,11 +35,35 @@ class NewTask extends CookiesJar {
     getData(field, data) {
         this.setState({ [field]: data });
     }
+    validation() {
+        var dateError = '';
+        var categoryError = '';
+        if (!this.state.category) {
+            categoryError = 'Category field is requiered';
+        }
+        if (!this.state.dueDate) {
+            dateError = 'Please pick date and time for your task!!!!!!!'
+        }
+        if (dateError || categoryError) {
+            this.setState({ dateError, categoryError });
+            return false;
+        } else {
+            return true;
+        }
+
+    }
     async submit() {
+        if(this.validation()){
         var categoryId=Storage.getItem('name',this.state.category,'categories') //task data
         var token = this.getCookie('userLogToken');                             //to insert
-        var taskData= this.state;                                               //in
-        taskData.createdby=token.token;                                         //database
+        var taskData= {                                                         //in database
+            taskName: this.state.taskName,
+            taskDescr: this.state.taskDescr,
+            important: this.state.important,
+            dueDate: this.state.dueDate,
+            category: this.state.category,
+        }                                              
+        taskData.createdby=token.token;                                         
         taskData.categoryId=categoryId.id;
         var result = await axios.post('http://localhost:8081/saveNewTask', taskData)
         taskData.id=result.data;
@@ -53,7 +79,7 @@ class NewTask extends CookiesJar {
         PubSub.publish(MY_TOPIC, calendarEvent); //publisher, goes to calendarComponent, rendering events
         var MYotherTOPIC = 'Render topic';       
         PubSub.publish(MYotherTOPIC, 'cancel task');
-        
+    }
     }
     cancel() {
         var MY_TOPIC = 'Render topic';
@@ -67,7 +93,9 @@ class NewTask extends CookiesJar {
                     <InputField placeholder='Task name' label='' name='taskName' type='text' onChange={this.handleChange} />
                     <InputField placeholder='Task description' label='' name='taskDescr' type='text' onChange={this.handleChange} />
                     <SelectCategory getCategory={this.getData} />
+                    <span className="text-error">{this.state.categoryError}</span>
                     <DateComponent getData={this.getData} />
+                    <span className="text-error">{this.state.dateError}</span>
                     <Important getImportantVal={this.getData} />
                     <Button className="manageTask" label="Save" onClick={this.submit} />
                     <Button className="manageTask" label="Cancel" onClick={this.cancel} />

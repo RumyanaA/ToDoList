@@ -80,7 +80,6 @@ class Login extends CookiesJar {
                     <span className="text-error">{this.state.passwordError}</span>
                     <span className="text-error">{this.state.userError}</span>
                     <Button className="buttons" label="Login" onClick={this.submit} />
-                    {/* <ForgottenPassword onClick={this.props.onClick} /> */}
                 </div>
             </div>
 
