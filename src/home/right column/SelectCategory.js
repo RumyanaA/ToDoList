@@ -27,7 +27,7 @@ class SelectCategory extends Component {
 
     }
     onFillOption(data){
-        this.props.getData('category', data);
+        this.props.getCategory('category', data);
     }
     componentDidMount() {
         this.getStoredCat();

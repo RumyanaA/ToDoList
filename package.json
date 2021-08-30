@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fullcalendar/bootstrap": "^5.9.0",
     "@fullcalendar/core": "^5.9.0",
     "@fullcalendar/daygrid": "^5.9.0",
     "@fullcalendar/list": "^5.9.0",
@@ -15,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "bootstrap": "^5.0.2",
+    "bootswatch": "^5.1.0",
     "core-util-is": "^1.0.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",

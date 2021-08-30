@@ -22,7 +22,7 @@
   cursor: pointer;
 }
 .buttonReg{
-  margin-left:50px;
+  margin-left:20px;
   padding: 2px 30px;
   border: 0;
     font-size: 18px;
@@ -84,7 +84,7 @@
   border-radius: 3px;
   border: 1px solid blue;
   transition: border 0.4s ease-out;
-  padding: 5px;
+  padding: 5px 5px;
   font-family: Oxygen, sans-serif;
   font-size: 19px;
   color: #3e3e42;
@@ -161,7 +161,6 @@
 }
 .dropdown {
   position: absolute;
-  
   top:0px;
   left: 140px;
   height: 120px;

@@ -7,8 +7,10 @@ import Important from "./ImportantComponent";
 import Button from "../../Button";
 import Storage from "../../Storage";
 import DateComponent from "./DateComponent";
+import CookiesJar from "../../CookiesJar";
+import axios from "axios";
 
-class NewTask extends Component {
+class NewTask extends CookiesJar {
     constructor(props) {
         super(props);
         this.state = {
@@ -31,16 +33,26 @@ class NewTask extends Component {
     getData(field, data) {
         this.setState({ [field]: data });
     }
-    submit() {
-        var calendarEvent = {
-            title: this.state.taskName,
+    async submit() {
+        var categoryId=Storage.getItem('name',this.state.category,'categories') //task data
+        var token = this.getCookie('userLogToken');                             //to insert
+        var taskData= this.state;                                               //in
+        taskData.createdby=token.token;                                         //database
+        taskData.categoryId=categoryId.id;
+        var result = await axios.post('http://localhost:8081/saveNewTask', taskData)
+        taskData.id=result.data;
+        delete taskData.createdby;                  //remove object createdby property before inserting into storage
+        Storage.setItem(taskData,'tasks')
+        var calendarEvent = {                       //task data to send to calendar as event
+            title: this.state.taskName,             
             start: this.state.dueDate,
             allDay: false
         }
         
         var MY_TOPIC = 'Add Event';
         PubSub.publish(MY_TOPIC, calendarEvent); //publisher, goes to calendarComponent, rendering events
-
+        var MYotherTOPIC = 'Render topic';       
+        PubSub.publish(MYotherTOPIC, 'cancel task');
         
     }
     cancel() {
