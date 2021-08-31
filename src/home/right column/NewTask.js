@@ -63,7 +63,7 @@ class NewTask extends CookiesJar {
                 important: this.state.important,
                 dueDate: this.state.dueDate,
                 category: this.state.category,
-                allDay: this.state.allDay
+                
             }
             taskData.createdby = token.token;
             taskData.categoryId = categoryId.id;
@@ -74,7 +74,8 @@ class NewTask extends CookiesJar {
             var calendarEvent = {                       //task data to send to calendar as event
                 title: this.state.taskName,
                 start: this.state.dueDate,
-                allDay: false
+                allDay: false,
+                important:this.state.important
             }
 
             var MY_TOPIC = 'Add Event';

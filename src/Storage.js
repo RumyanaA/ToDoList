@@ -16,6 +16,10 @@ class Storage {
         return result;
 
     }
+    static getItems(key, value,fieldname){
+        var result=this[fieldname].filter(item=>item[key]==value)
+        return result;
+    }
     static getAll(key,fieldName){
         var result=this[fieldName].map(item => item[key]);
         return result;

@@ -11,7 +11,7 @@ export default class TodoList extends Component {
         return (
             <div className='layout'>
                 <Switch>
-                    <Route exact path='/todoList' component={CalendarComponent}/>
+                    {/* <Route  exact path='/todoList' component={Middle}/> */}
                     <Route  path="/todoList/:component" component={Middle} />
                 </Switch>
 

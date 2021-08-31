@@ -3,6 +3,7 @@ import { Component } from "react";
 import Button from '../../../Button';
 import { withRouter } from 'react-router-dom';
 import Username from "./Username";
+import PubSub from 'pubsub-js'
 
 class UserNav extends Component{
     constructor(props){
@@ -24,9 +25,13 @@ class UserNav extends Component{
     }
     calendar(){
         this.props.history.push('/todoList/calendar');
+        var MY_TOPIC = 'show all';
+        PubSub.publish(MY_TOPIC, 'important');
     }
     important(){
-
+        
+        var MY_TOPIC = 'show important';
+        PubSub.publish(MY_TOPIC, 'important');
     }
     completed(){
 
