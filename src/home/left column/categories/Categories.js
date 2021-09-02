@@ -1,11 +1,11 @@
 import axios from "axios";
 import React from "react";
-import { Component } from "react";
 import Button from '../../../Button';
 import InputField from "../../../InputField";
 import CatBox from "./CategoriesBox";
 import CookiesJar from "../../../CookiesJar";
 import Storage from "../../../Storage";
+import CatCheckbox from './categoriesCheckbox';
 class Categories extends CookiesJar {
     constructor(props) {
         super(props);
@@ -19,10 +19,7 @@ class Categories extends CookiesJar {
             name: '',
             note: '',
             catArray: []
-        }
-        
-
-
+        }      
     }
     
     addCategory() {
@@ -47,18 +44,43 @@ class Categories extends CookiesJar {
         this.catData={
             name: catInfo.name,
             note: catInfo.note,
-            id: ''
+            id: '',
+            isChecked: true
         }
         var result = await axios.post('http://localhost:8081/addCategory', catInfo)
         this.catData.id=result.data;
         Storage.setItem(this.catData, 'categories');
+        var oldState=this.state;
+        oldState.catArray.push(this.catData);
         this.setState({
             name: '',
             note: '',
-            hideCategoryDiv: true
+            hideCategoryDiv: true,
+            catArray: oldState.catArray
         })
-
-
+    }
+    async componentDidMount() {
+        var cookie = this.getCookie('userLogToken');
+        var token = cookie.token;
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+        var res = await axios.get('http://localhost:8081/getCatName', config)
+        var allCategories = res.data;
+        var storeCategories = {};
+        var oldState = this.state;
+        for (var i = 0; i < allCategories.length; i++) {
+            storeCategories = {
+                name: allCategories[i].name,
+                note: allCategories[i].note,
+                id: allCategories[i].id,
+                isChecked: true
+            }
+            
+            oldState.catArray.push(storeCategories);
+            Storage.setItem(allCategories[i], 'categories')
+        }
+        this.setState(oldState);
     }
     
     handleChange(event) {
@@ -68,7 +90,7 @@ class Categories extends CookiesJar {
     }
     render() {
         return (<div className='catComponet'>
-            <CatBox categoryName={this.catData.name}/>
+            <CatCheckbox categories={this.state.catArray}/>
             <Button className='addCat' label="+ Add Category" onClick={this.addCategory} />
             <div className='addcategoryBox' hidden={this.state.hideCategoryDiv}>
                 <InputField value={this.state.name} className='categoryName' placeholder='name' label='' name='name' type='text' onChange={this.handleChange} />
