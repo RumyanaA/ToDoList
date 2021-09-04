@@ -75,12 +75,13 @@ class NewTask extends CookiesJar {
                 title: this.state.taskName,
                 start: this.state.dueDate,
                 allDay: false,
-                important:this.state.important
+                important:this.state.important,
+                category: this.state.category
             }
-
+            
             var MY_TOPIC = 'Add Event';
-            PubSub.publish(MY_TOPIC, calendarEvent); //publisher, goes to calendarComponent, rendering events
-
+            PubSub.publish(MY_TOPIC, calendarEvent); //publisher, goes to middle, rendering events
+            
             var MYotherTOPIC = 'Render topic';
             PubSub.publish(MYotherTOPIC, 'cancel task');
         }
