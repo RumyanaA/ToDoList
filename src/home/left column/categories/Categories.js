@@ -78,7 +78,7 @@ class Categories extends CookiesJar {
             }
             
             oldState.catArray.push(storeCategories);
-            Storage.setItem(allCategories[i], 'categories')
+            Storage.setItem(storeCategories, 'categories')
         }
         this.setState(oldState);
     }

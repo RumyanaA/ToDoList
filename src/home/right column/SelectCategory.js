@@ -23,6 +23,7 @@ class SelectCategory extends Component {
         this.setState({
             category: event.target.value
         });
+        this.props.getCategory('category', event.target.value);
         
 
     }

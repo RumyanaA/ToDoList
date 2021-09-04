@@ -36,6 +36,9 @@ class Storage {
             }
         }
     }
+    static updateItems(key,value,fieldname){
+        this[fieldname].forEach(item=>item[key]=value)
+    }
     static deleteItem(key, value, fieldName){
         var index = this[fieldName].findIndex(item => item[key] == value);
         if (index > -1) {

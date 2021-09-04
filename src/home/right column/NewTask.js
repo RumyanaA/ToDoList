@@ -71,6 +71,8 @@ class NewTask extends CookiesJar {
             taskData.id = result.data;
             delete taskData.createdby;                  //remove object createdby property before inserting into storage
             Storage.setItem(taskData, 'tasks')
+            var category=Storage.getItem('name',taskData.category,'categories')
+            if(category.isChecked){
             var calendarEvent = {                       //task data to send to calendar as event
                 title: this.state.taskName,
                 start: this.state.dueDate,
@@ -81,7 +83,7 @@ class NewTask extends CookiesJar {
             
             var MY_TOPIC = 'Add Event';
             PubSub.publish(MY_TOPIC, calendarEvent); //publisher, goes to middle, rendering events
-            
+        }
             var MYotherTOPIC = 'Render topic';
             PubSub.publish(MYotherTOPIC, 'cancel task');
         }
@@ -90,7 +92,7 @@ class NewTask extends CookiesJar {
         var MY_TOPIC = 'Render topic';
         PubSub.publish(MY_TOPIC, 'cancel task'); //publisher, goes to right column, rendering default
     }
-
+    
     render() {
         {
             return (

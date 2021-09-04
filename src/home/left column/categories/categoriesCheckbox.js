@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CookiesJar from "../../../CookiesJar";
 import PubSub from 'pubsub-js';
+import Storage from '../../../Storage';
 
 class CatCheckbox extends CookiesJar {
     constructor(props) {
@@ -19,6 +20,7 @@ class CatCheckbox extends CookiesJar {
         allCategories.forEach(category => category.isChecked = event.target.checked)
         this.checkedDefault=!this.checkedDefault;
         this.setState({ categories: allCategories })
+        Storage.updateItems('isChecked',event.target.checked,'categories')
         for(var i=0;i<allCategories.length;i++){
             if(allCategories[i].isChecked){
                 this.Checkedcategories.push(allCategories[i].name)
@@ -33,8 +35,9 @@ class CatCheckbox extends CookiesJar {
         allCategories.forEach(category=> {
            if (category.name === event.target.value){
               category.isChecked =  event.target.checked
+              Storage.updateItem('name',category.name,'isChecked',event.target.checked,'categories')
               if(!event.target.checked){
-                  this.checkedDefault = event.target.checked
+                  this.checkedDefault = event.target.checked               
               }          
             }
         })
