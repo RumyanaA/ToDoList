@@ -62,8 +62,10 @@ class CatCheckbox extends CookiesJar {
     render() {
         return (
             <div>
+            <h4 className='catHeader'>Categories</h4>
+            <div className='categoriesBox'>
                 <input type="checkbox" checked={this.checkedDefault} onClick={this.handleAllChecked} value="checkedall" /> Check
-                <ul>
+                <ul className='ulCategories'>
                     {
                         this.state.categories.map((category) => {
                             return (
@@ -84,6 +86,7 @@ class CatCheckbox extends CookiesJar {
                 
                 
                 
+            </div>
             </div>
         )
     }

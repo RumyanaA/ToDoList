@@ -19,10 +19,14 @@ class DateComponent extends Component{
     render(){
         return(
             <DatePicker 
-            placeholderText='Task due...'
-            selected={this.state.startDate} 
+            className={this.props.class}
+            
+            // placeholderText='Task due...'
+            // selected={this.state.StartDate} 
+            readOnly={this.props.readonly}
             onChange={this.handleDateChange}
-            calendarClassName="rasta-stripes"
+            calendarClassName={this.props.classbox}
+            selected={this.props.taskDue}
             showTimeSelect
             timeFormat="HH:mm"
               timeIntervals={30}

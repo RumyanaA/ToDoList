@@ -9,6 +9,7 @@ import Storage from "../../Storage";
 import DateComponent from "./DateComponent";
 import CookiesJar from "../../CookiesJar";
 import axios from "axios";
+import moment from "moment";
 
 class NewTask extends CookiesJar {
     constructor(props) {
@@ -17,7 +18,7 @@ class NewTask extends CookiesJar {
             taskName: '',
             taskDescr: '',
             important: false,
-            dueDate: '',
+            dueDate: new Date(),
             category: '',
             allDay: false,
             categoryError: '',
@@ -63,6 +64,8 @@ class NewTask extends CookiesJar {
                 important: this.state.important,
                 dueDate: this.state.dueDate,
                 category: this.state.category,
+                color:'blue',
+                completed:false
                 
             }
             taskData.createdby = token.token;
@@ -77,8 +80,11 @@ class NewTask extends CookiesJar {
                 title: this.state.taskName,
                 start: this.state.dueDate,
                 allDay: false,
+                color:taskData.color,
+                id: taskData.id,
                 important:this.state.important,
-                category: this.state.category
+                category: this.state.category,
+                completed: false
             }
             
             var MY_TOPIC = 'Add Event';
@@ -99,13 +105,14 @@ class NewTask extends CookiesJar {
                 <div className='createTask'>
                     <InputField placeholder='Task name' label='' name='taskName' type='text' onChange={this.handleChange} />
                     <InputField placeholder='Task description' label='' name='taskDescr' type='text' onChange={this.handleChange} />
-                    <SelectCategory getCategory={this.getData} />
+                    <SelectCategory getCategory={this.getData} isCatReadOnly={false} category={this.state.category} />
                     <span className="text-error">{this.state.categoryError}</span>
-                    <DateComponent getData={this.getData} />
+                    <DateComponent class='newTaskDatepicker' classbox='newdatebox' getData={this.getData} taskDue={moment(this.state.dueDate).toDate()} readonly={false}/>
                     <span className="text-error">{this.state.dateError}</span>
-                    <Important getImportantVal={this.getData} />
+                    <Important getImportantVal={this.getData} important={this.state.important}/>
                     <Button className="manageTask" label="Save" onClick={this.submit} />
                     <Button className="manageTask" label="Cancel" onClick={this.cancel} />
+                    <p className='editWindow'> </p>
                 </div>
             )
         }

@@ -19,6 +19,7 @@ const InputField = ({
       <label className='floating-label' htmlFor={name}>{label}</label>
       <input
       required
+      
         id={name}
         name={name}
         type={type}

@@ -17,6 +17,7 @@ class Middle extends CookiesJar {
     this.showImportant = this.showImportant.bind(this);
     this.showAll = this.showAll.bind(this);
     this.addNewTask = this.addNewTask.bind(this);
+    this.editTask = this.editTask.bind(this);
     this.manageCategory = this.manageCategory.bind(this);
 
   }
@@ -24,6 +25,15 @@ class Middle extends CookiesJar {
     var oldState = this.state.event;
     oldState.push(data);
     this.setState(oldState);
+
+  }
+  editTask(msg,data){
+    var prevState=this.state.event;
+    var index=prevState.findIndex(item => item.id == data.id)
+    if(index>-1){
+      prevState[index]=data      
+      this.setState(prevState)
+    }
 
   }
   manageCategory(msg, data) {
@@ -38,6 +48,10 @@ class Middle extends CookiesJar {
           title: tasksFromCategory[j].taskName,
           start: tasksFromCategory[j].dueDate,
           allDay: false,
+          important:tasksFromCategory[j].important,
+          completed:tasksFromCategory[j].completed,
+          color:tasksFromCategory[j].color,
+          id:tasksFromCategory[j].id,
           category: tasksFromCategory[j].category
         }
         oldState.push(eventsFromCategory);
@@ -56,6 +70,10 @@ class Middle extends CookiesJar {
         title: tasks[i].taskName,
         start: tasks[i].dueDate,
         allDay: false,
+        color: tasks[i].color,
+        important: tasks[i].important,
+        completed:tasks[i].completed,
+        id:tasks[i].id,
         category: tasks[i].category
       }
       oldState.push(events);
@@ -72,7 +90,11 @@ class Middle extends CookiesJar {
         title: importantTasks[i].taskName,
         start: importantTasks[i].dueDate,
         allDay: false,
-        category: importantTasks[i].category
+        category: importantTasks[i].category,
+        id:importantTasks[i].id,
+        important: importantTasks[i].important,
+        completed: importantTasks[i].completed,
+        color:importantTasks[i].color
       }
       oldState.push(importantEvents);
     }
@@ -92,7 +114,11 @@ class Middle extends CookiesJar {
         title: storedtasks[i].taskName,
         start: storedtasks[i].dueDate,
         allDay: false,
-        category: storedtasks[i].category
+        category: storedtasks[i].category,
+        id: storedtasks[i].id,
+        important: storedtasks[i].important,
+        completed: storedtasks[i].completed,
+        color: storedtasks[i].color
       }
       var oldState = this.state;
       oldState.event.push(storeEvents);
@@ -105,6 +131,7 @@ class Middle extends CookiesJar {
     PubSub.subscribe('manage category', this.manageCategory);
     PubSub.subscribe('show all', this.showAll);
     PubSub.subscribe('Add Event', this.addNewTask); //subscriber to submit button on New Task component
+    PubSub.subscribe('change Event', this.editTask);
   }
   render = () => {
     var toRender;

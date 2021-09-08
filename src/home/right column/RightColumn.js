@@ -4,6 +4,7 @@ import PubSub from "pubsub-js";
 import NewTask from "./NewTask";
 import UserNav from "../left column/userNavigation/UserNav";
 import Default from "./default";
+import EditTask from "./EditTask";
 class RightColumn extends Component {
     constructor(props) {
         super(props);
@@ -11,9 +12,11 @@ class RightColumn extends Component {
             toRender: <Default/>
         }
         this.mySubscriber = this.mySubscriber.bind(this);
+        this.editTask = this.editTask.bind(this);
     }
     componentDidMount() {
         PubSub.subscribe('Render topic', this.mySubscriber); //subscriber to New Task button
+        PubSub.subscribe('Edit task', this.editTask)
     }
     mySubscriber(msg, data) { //subscribers have function for publishing
         switch (data) {
@@ -27,6 +30,10 @@ class RightColumn extends Component {
                 this.setState({toRender:<Default/>})
                 
         }
+    }
+    editTask(msg,data){
+        this.setState({toRender:<Default/>}) 
+        this.setState({toRender: <EditTask taskData={data} />})
     }
     render = () => {
         return (

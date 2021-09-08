@@ -103,6 +103,7 @@
   height: 450px;
   background-image: url('./blackCat.png');
   background-size: 100%;
+  background-repeat: no-repeat;
 }
 .layout{
   /* background-color:darkgray; */
@@ -268,6 +269,12 @@
   /* border: 1px solid blue; */
   box-shadow: 6px 0px 5px grey;
 }
+.ulCategories{
+  list-style-type: none;
+  position: relative;
+  right:40px;
+  bottom:10px;
+}
 .categoryName{
   margin-top: 10px;
   margin-left: 10px;
@@ -314,9 +321,76 @@
  right: 20px;
   top:40px;
 }
-.rasta-stripes{
+.datebox{
   position:relative;
-  
-  
   width: 327px;
+  top:200px;
+}
+.newdatebox{
+  position:relative;
+  width: 327px;
+  
+}
+
+/* .taskTitle{
+  position: relative;
+  top:20px;
+  border: none;
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  padding: none;
+  width: auto;
+} */
+
+.editTask{
+position:relative;
+top:300px;
+left:100px;
+}
+.editSaveTask{
+  position:relative;
+top:325px;
+right:200px;
+}
+.editWindow{
+  position: relative;
+  top:320px;
+  left:40px;
+  height: 450px;
+  background-image: url('./blackCat.png');
+  background-size: 50%;
+  background-repeat: no-repeat;
+}
+.completed{
+  position:relative;
+  top:250px;
+  right:100px;
+}
+.important{
+  position:relative;
+  top:220px;
+  right:9.5px;
+}
+.datepick{
+  position:relative;
+  top:200px;
+  left:3px;
+  padding:5px;
+  width: 77%;
+  border:none;
+  font-size: large;
+  background-color: whitesmoke;
+}
+.datepick:focus{
+  outline: none; 
+}
+.editDate{
+  position:relative;
+  top:170px;
+  left:250px;
+  border:none;
+  cursor:pointer;
+  background-color: whitesmoke;
+  
 }

@@ -12,5 +12,10 @@ class taskController{
         var response = await TaskService.getCreatedby(auth);
         res.send(response);
     }
+    static async editTask(req,res, next){
+        var taskNewData=req.body
+        var response = await TaskService.updateTask(taskNewData);
+        res.send(response)
+    }
 }
 module.exports = taskController;

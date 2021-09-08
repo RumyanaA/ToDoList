@@ -2,7 +2,6 @@ import axios from "axios";
 import React from "react";
 import Button from '../../../Button';
 import InputField from "../../../InputField";
-import CatBox from "./CategoriesBox";
 import CookiesJar from "../../../CookiesJar";
 import Storage from "../../../Storage";
 import CatCheckbox from './categoriesCheckbox';

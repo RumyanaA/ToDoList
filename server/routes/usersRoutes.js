@@ -11,4 +11,5 @@ router.post('/addCategory', CategoryController.newCategory);
 router.get('/getCatName',CategoryController.getCategories);
 router.post('/SaveNewTask', taskController.newTask);
 router.get('/getAllTasks', taskController.getTasks);
+router.put('/editTask', taskController.editTask);
 module.exports = router;

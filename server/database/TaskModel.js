@@ -9,6 +9,16 @@ class TaskModel{
             logger.error(e.message);
         }
     }
+    static async editTask(taskId,newValues){
+        try{
+            var res = await  client.get().collection("Tasks").updateOne(taskId,newValues)
+            if(res.modifiedCount==1){
+                return 'success'
+            }
+        }catch(e){
+            logger.error(e.message);
+        }
+    }
     static async getTasks(userid){
         try{
             var tasksArray=[];
@@ -23,6 +33,8 @@ class TaskModel{
                     important: result[i].important,
                     dueDate: result[i].dueDate,
                     category: result[i].category,
+                    completed: result[i].completed,
+                    color: result[i].color,
                     id: result[i]._id,
                     
                 })

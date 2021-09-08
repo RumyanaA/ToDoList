@@ -19,6 +19,14 @@ class CalendarComponent extends Component {
     var MY_TOPIC = 'Render topic';
     PubSub.publish(MY_TOPIC, 'create task'); //publisher 
   }
+  editEvent(info){
+    var selectedEventObj=info.event;
+    
+    var selectedTask=Storage.getItem('id',selectedEventObj.id, 'tasks')
+    var MY_TOPIC = 'Edit task';
+    PubSub.publish(MY_TOPIC, selectedTask);
+    
+  }
   
   render() {
     return (
@@ -26,6 +34,7 @@ class CalendarComponent extends Component {
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
           initialView="dayGridMonth"
+          eventColor='blue'
           timeFormat={
             'hh:mm A'
           }
@@ -35,6 +44,7 @@ class CalendarComponent extends Component {
             meridiem: "short",
           }}
           events={[...this.props.data]}
+          eventClick={this.editEvent}
           headerToolbar={{
             left: 'prev,next today',
             center: 'title',

@@ -1,6 +1,7 @@
 var jwt = require('jsonwebtoken');
 var config = require('./../config/config.js');
 var logger = require('./LoggingService.js');
+var ObjectId = require('mongodb').ObjectId;
 var TaskModel = require('./../database/TaskModel.js')
 class TaskService{
     static async getUserId(taskData) {
@@ -29,6 +30,24 @@ class TaskService{
         }catch(e){
             logger.error(e.message);
         }
+    }
+    static async updateTask(taskNewData){
+        var newValues={$set:{
+            'taskName': taskNewData.taskName,
+            'taskDescr': taskNewData.taskDescr,
+            'important': taskNewData.important,
+            'completed': taskNewData.completed,
+            'color': taskNewData.color,
+            'dueDate': taskNewData.dueDate, 
+            'category': taskNewData.category          
+        }
+        }
+        
+        var taskId={
+            _id: ObjectId(taskNewData.id)
+              }
+        var result = await TaskModel.editTask(taskId,newValues)
+        return result;
     }
 }
 module.exports = TaskService;

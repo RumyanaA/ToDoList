@@ -2,14 +2,14 @@ import React from "react";
 import { Component } from "react";
 import { Hint } from 'react-autocomplete-hint';
 import Storage from "../../Storage";
-import InputField from "../../InputField";
-import { text } from "body-parser";
+
 class SelectCategory extends Component {
     constructor(props) {
         super(props);
         this.state = {
             hintData: [],
-            category: ''
+            category: this.props.category
+            
         }
         this.handleChange = this.handleChange.bind(this);
         this.getStoredCat = this.getStoredCat.bind(this);
@@ -37,7 +37,7 @@ class SelectCategory extends Component {
         return (
             <div>
                 <Hint options={this.state.hintData} allowTabFill onFill={this.onFillOption} >
-                    <input className='input-with-hint' name='category' type='text' onChange={this.handleChange}
+                    <input className='input-with-hint' readOnly={this.props.isCatReadOnly} value={this.state.category} name='category' type='text' onChange={this.handleChange}
                     />
                 </Hint>
             </div>

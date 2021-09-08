@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import CookiesJar from "../../../CookiesJar";
 import Storage from "../../../Storage";
-import Checkbox from './../../../checkbox';
+import Checkbox from '../../../checkbox';
 
 class CatBox extends CookiesJar {
     constructor(props) {
