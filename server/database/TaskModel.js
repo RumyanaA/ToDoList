@@ -45,5 +45,15 @@ class TaskModel{
             logger.error(e.message);
         }
     }
+    static async deleteTask(data){
+        try{
+            var res = await  client.get().collection("Tasks").deleteOne(data)
+            if(res.deletedCount==1){
+                return 'task deleted'
+            }
+        }catch(e){
+            logger.error(e.message);
+        }
+    }
 }
 module.exports = TaskModel;

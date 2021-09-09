@@ -23,12 +23,22 @@ class SelectCategory extends Component {
         this.setState({
             category: event.target.value
         });
+        var catExistance = this.state.hintData.filter(cat => cat==event.target.value);
+        if(catExistance.length>0){
         this.props.getCategory('category', event.target.value);
+        }else{
+            this.props.getCategory('category', '');
+        }
         
 
     }
     onFillOption(data){
+        var catExistance = this.state.hintData.filter(cat => cat==data);
+        if(catExistance.length>0){
         this.props.getCategory('category', data);
+        }else{
+            this.props.getCategory('category', '');
+        }
     }
     componentDidMount() {
         this.getStoredCat();
@@ -37,7 +47,7 @@ class SelectCategory extends Component {
         return (
             <div>
                 <Hint options={this.state.hintData} allowTabFill onFill={this.onFillOption} >
-                    <input className='input-with-hint' readOnly={this.props.isCatReadOnly} value={this.state.category} name='category' type='text' onChange={this.handleChange}
+                    <input className={this.props.stylename} readOnly={this.props.isCatReadOnly} value={this.state.category} name='category' type='text' onChange={this.handleChange}
                     />
                 </Hint>
             </div>

@@ -15,11 +15,12 @@ class Middle extends CookiesJar {
       event: []
     }
     this.showImportant = this.showImportant.bind(this);
+    this.showCompleted = this.showCompleted.bind(this);
     this.showAll = this.showAll.bind(this);
     this.addNewTask = this.addNewTask.bind(this);
     this.editTask = this.editTask.bind(this);
     this.manageCategory = this.manageCategory.bind(this);
-
+    this.removeEvent = this.removeEvent.bind(this);
   }
   addNewTask(msg, data) { //function for publishing
     var oldState = this.state.event;
@@ -35,6 +36,15 @@ class Middle extends CookiesJar {
       this.setState(prevState)
     }
 
+  }
+  removeEvent(msg, data){
+    var prevState=this.state.event;
+    var index = prevState.findIndex(item=>item.id == data)
+      if(index >- 1){
+        prevState.splice(index,1)
+      }
+      this.setState(prevState)
+    
   }
   manageCategory(msg, data) {
     
@@ -64,8 +74,11 @@ class Middle extends CookiesJar {
     var oldState = this.state.event;
     oldState.length = 0;
     var tasks = Storage.getField('tasks')
+    
+    
     var events = {};
     for (var i = 0; i < tasks.length; i++) {
+      if(!tasks[i].completed){
       events = {
         title: tasks[i].taskName,
         start: tasks[i].dueDate,
@@ -78,14 +91,39 @@ class Middle extends CookiesJar {
       }
       oldState.push(events);
     }
+    }
+    this.setState(oldState)
+  
+  }
+  showCompleted(msg, data) {
+    var oldState = this.state.event;
+    oldState.length = 0;
+    var completedTasks = Storage.getItems(data, true, 'tasks')
+    var completedEvents = {};
+    for (var i = 0; i < completedTasks.length; i++) {
+      completedEvents = {
+        title: completedTasks[i].taskName,
+        start: completedTasks[i].dueDate,
+        allDay: false,
+        category: completedTasks[i].category,
+        id: completedTasks[i].id,
+        important: completedTasks[i].important,
+        completed: completedTasks[i].completed,
+        color:completedTasks[i].color
+      }
+      oldState.push(completedEvents);
+    }
     this.setState(oldState)
   }
   showImportant(msg, data) {
     var oldState = this.state.event;
     oldState.length = 0;
     var importantTasks = Storage.getItems(data, true, 'tasks')
+   
+    
     var importantEvents = {};
     for (var i = 0; i < importantTasks.length; i++) {
+      if(!importantTasks[i].completed){
       importantEvents = {
         title: importantTasks[i].taskName,
         start: importantTasks[i].dueDate,
@@ -98,6 +136,7 @@ class Middle extends CookiesJar {
       }
       oldState.push(importantEvents);
     }
+    }
     this.setState(oldState)
   }
   async componentDidMount() {
@@ -109,7 +148,9 @@ class Middle extends CookiesJar {
     };
     var res = await axios.get('http://localhost:8081/getAllTasks', config)
     var storedtasks = res.data;
+    
     for (var i = 0; i < storedtasks.length; i++) {
+      if(!storedtasks[i].completed){
       storeEvents = {
         title: storedtasks[i].taskName,
         start: storedtasks[i].dueDate,
@@ -123,15 +164,17 @@ class Middle extends CookiesJar {
       var oldState = this.state;
       oldState.event.push(storeEvents);
       this.setState(oldState);
+    }
 
       Storage.setItem(storedtasks[i], 'tasks')
     }
     PubSub.subscribe('show important', this.showImportant);
-
+    PubSub.subscribe('show completed', this.showCompleted);
     PubSub.subscribe('manage category', this.manageCategory);
     PubSub.subscribe('show all', this.showAll);
     PubSub.subscribe('Add Event', this.addNewTask); //subscriber to submit button on New Task component
     PubSub.subscribe('change Event', this.editTask);
+    PubSub.subscribe('remove Event', this.removeEvent);
   }
   render = () => {
     var toRender;

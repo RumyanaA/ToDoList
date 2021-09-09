@@ -249,7 +249,7 @@
 .categoriesBox{
   margin-left: 10px;
   width: 210px;
-  height: 250px;
+  height: 310px;
   box-sizing: border-box;
   /* border: 1px solid blue; */
   overflow: auto;
@@ -393,4 +393,12 @@ right:200px;
   cursor:pointer;
   background-color: whitesmoke;
   
+}
+.editSelectCat{
+  position:relative;
+  top:200px;
+  padding:5px 20px;
+  border:none;
+  background-color: whitesmoke;
+  font-size: 17px;
 }

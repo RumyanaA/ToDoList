@@ -20,7 +20,6 @@ class NewTask extends CookiesJar {
             important: false,
             dueDate: new Date(),
             category: '',
-            allDay: false,
             categoryError: '',
             dateError: ''
         }
@@ -44,7 +43,7 @@ class NewTask extends CookiesJar {
             categoryError = 'Category field is requiered';
         }
         if (!this.state.dueDate) {
-            dateError = 'Please pick date and time for your task!!!!!!!'
+            dateError = 'Please pick date and time for your task!'
         }
         if (dateError || categoryError) {
             this.setState({ dateError, categoryError });
@@ -64,9 +63,14 @@ class NewTask extends CookiesJar {
                 important: this.state.important,
                 dueDate: this.state.dueDate,
                 category: this.state.category,
-                color:'blue',
+                color:'',
                 completed:false
                 
+            }
+            if(taskData.important==true){
+                taskData.color='purple'
+            }else if(taskData.important==false){
+                taskData.color='blue'
             }
             taskData.createdby = token.token;
             taskData.categoryId = categoryId.id;
@@ -105,7 +109,7 @@ class NewTask extends CookiesJar {
                 <div className='createTask'>
                     <InputField placeholder='Task name' label='' name='taskName' type='text' onChange={this.handleChange} />
                     <InputField placeholder='Task description' label='' name='taskDescr' type='text' onChange={this.handleChange} />
-                    <SelectCategory getCategory={this.getData} isCatReadOnly={false} category={this.state.category} />
+                    <SelectCategory stylename='input-with-hint' getCategory={this.getData} isCatReadOnly={false} category={this.state.category} />
                     <span className="text-error">{this.state.categoryError}</span>
                     <DateComponent class='newTaskDatepicker' classbox='newdatebox' getData={this.getData} taskDue={moment(this.state.dueDate).toDate()} readonly={false}/>
                     <span className="text-error">{this.state.dateError}</span>

@@ -49,5 +49,10 @@ class TaskService{
         var result = await TaskModel.editTask(taskId,newValues)
         return result;
     }
+    static async removeTask(taskId){
+        var data = { _id: new ObjectId(taskId) };
+        var result = await TaskModel.deleteTask(data)
+        return result;
+    }
 }
 module.exports = TaskService;

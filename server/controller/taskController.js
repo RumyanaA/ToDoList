@@ -17,5 +17,10 @@ class taskController{
         var response = await TaskService.updateTask(taskNewData);
         res.send(response)
     }
+    static async deleteTask(req, res, next){
+        var taskId =req.query.id
+        var response = await TaskService.removeTask(taskId);
+        res.send(response)
+    }
 }
 module.exports = taskController;
