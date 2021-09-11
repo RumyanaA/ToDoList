@@ -105,7 +105,12 @@ class EditTask extends Component {
                     updatedTask.color = 'green'
                 }
                 if (updatedTask.completed == false) {
-                    updatedTask.color = 'blue'
+                    if(updatedTask.important==true){
+                        updatedTask.color='purple'
+                    }else if(updatedTask.important==false){
+                        updatedTask.color = 'blue'   
+                    }
+                    
                 }
                 Storage.replaceItem('id', this.taskInfo.id, updatedTask, 'tasks')
                 var result = await axios.put('http://localhost:8081/editTask', updatedTask)
@@ -152,17 +157,19 @@ class EditTask extends Component {
     render() {
         return (
             <div>
-                <input className='taskTitle' readOnly={this.state.isNameReadonly} name='taskName' value={this.state.taskName} type='text' onChange={this.handleChange}></input>
-                <button type='button' name='changeName' onClick={this.isEditable}>
+                <textarea className='taskTitle'  readOnly={this.state.isNameReadonly} name='taskName' value={this.state.taskName} type='text' onChange={this.handleChange}></textarea>
+                <button className='titlebut' type='button' name='changeName' onClick={this.isEditable}>
                     <  BsPencil className='bsPencil' />
                 </button>
-                <input readOnly={this.state.isDescrReadonly} name='taskName' value={this.state.taskDescr} type='text' onChange={this.handleChange}></input>
-                <button type='button' name='changeDescr' onClick={this.isEditable}>
+                
+                <textarea  className='descrview' readOnly={this.state.isDescrReadonly} name='taskName' value={this.state.taskDescr} type='text' onChange={this.handleChange}></textarea>
+                <button  className='descrbut'type='button' name='changeDescr' onClick={this.isEditable}>
                     <  BsPencil className='bsPencil' />
                 </button>
+                <h className='cath'>Category:</h>
                 <SelectCategory stylename='editSelectCat' getCategory={this.getData} isCatReadOnly={this.state.isCatReadOnly} category={this.state.category} />
                 <span className="text-error">{this.state.categoryError}</span>
-                <button type='button' name='changeCat' onClick={this.isEditable}>
+                <button type='button' className='changeCat' name='changeCat' onClick={this.isEditable}>
                     <  BsPencil className='bsPencil' />
                 </button>
                 <DateComponent class='datepick' classbox='datebox' getData={this.getData} taskDue={moment(this.state.dueDate).toDate()} readonly={this.state.isDateReadOnly} />

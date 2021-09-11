@@ -396,9 +396,50 @@ right:200px;
 }
 .editSelectCat{
   position:relative;
-  top:200px;
+  left:110px;
+  top:155px;
   padding:5px 20px;
   border:none;
   background-color: whitesmoke;
   font-size: 17px;
+}
+.editSelectCat:focus{
+  outline: none;
+}
+.cath{
+  position: relative;
+  top:179px;
+  right:0px;
+}
+.changeCat{
+  position: relative;
+  top:142px;
+  left:220px;
+}
+.descrview{
+  position: relative;
+  top:100px;
+  left:10px;
+  padding:5px 80px 35px 0px;
+  border: 1px solid #ccc;
+  background-color: whitesmoke;
+}
+.descrbut{
+  position:relative;
+  top:92px;
+  left:15px;
+}
+.taskTitle{
+  position: relative;
+  top:50px;
+  border: 1px solid #ccc;
+  /* font-size: large; */
+  padding:5px 40px 35px 0px;
+  left:10px;
+  background-color: whitesmoke;
+}
+.titlebut{
+  position:relative;
+  top:42px;
+  left:15px;
 }
