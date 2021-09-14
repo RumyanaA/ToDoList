@@ -148,9 +148,10 @@ class Middle extends CookiesJar {
     };
     var res = await axios.get('http://localhost:8081/getAllTasks', config)
     var storedtasks = res.data;
-    
+    Storage.clearField('tasks')
     for (var i = 0; i < storedtasks.length; i++) {
       if(!storedtasks[i].completed){
+        
       storeEvents = {
         title: storedtasks[i].taskName,
         start: storedtasks[i].dueDate,
@@ -164,9 +165,14 @@ class Middle extends CookiesJar {
       var oldState = this.state;
       oldState.event.push(storeEvents);
       this.setState(oldState);
-    }
-
+    } 
       Storage.setItem(storedtasks[i], 'tasks')
+    }
+    if (this.props.match.params.component == 'important'){
+      this.showImportant('show important','important')
+    }
+    if (this.props.match.params.component == 'completed'){
+      this.showCompleted('show completed','completed')
     }
     PubSub.subscribe('show important', this.showImportant);
     PubSub.subscribe('show completed', this.showCompleted);

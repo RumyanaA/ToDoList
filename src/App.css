@@ -305,16 +305,22 @@
 }
 .input-with-hint {
   border: 0.9px solid #888;
-  padding: 0.5em 1em;
+  padding:2px;
+  margin:10px;
   border-radius: 0.2em;
   font-size: 1em;
   color: #333;
   
 }
 
-/* .createTask{
-  
-} */
+.createTask{
+  position:relative;
+  top:50px;
+  left:20px;
+}
+.nametask{
+  margin:10px;
+}
 .manageTask{
   position: relative;
   
@@ -345,17 +351,43 @@
 
 .editTask{
 position:relative;
-top:300px;
-left:100px;
+top:176px;
+left:150px;
+
+
 }
+.editTask:hover{
+  background-color: rgb(240, 233, 233);
+}
+.editTask:active {
+  background-color: rgb(240, 233, 233);
+}
+
 .editSaveTask{
-  position:relative;
-top:325px;
+position:relative;
+top:200px;
 right:200px;
+}
+.editSaveTask:hover{
+  background-color: rgb(240, 233, 233);
+}
+.editSaveTask:active {
+  background-color: rgb(240, 233, 233);
+}
+.deleteTask{
+  position:relative;
+  bottom:330px;
+  right:50px;
+}
+.deleteTask:hover{
+  background-color: rgb(240, 233, 233);
+}
+.deleteTask:active {
+  background-color: rgb(240, 233, 233);
 }
 .editWindow{
   position: relative;
-  top:320px;
+  top:170px;
   left:40px;
   height: 450px;
   background-image: url('./blackCat.png');
@@ -364,17 +396,17 @@ right:200px;
 }
 .completed{
   position:relative;
-  top:250px;
+  top:150px;
   right:100px;
 }
 .important{
   position:relative;
-  top:220px;
+  top:115px;
   right:9.5px;
 }
 .datepick{
   position:relative;
-  top:200px;
+  top:100px;
   left:3px;
   padding:5px;
   width: 77%;
@@ -387,17 +419,18 @@ right:200px;
 }
 .editDate{
   position:relative;
-  top:170px;
-  left:250px;
+  top:70px;
+  left:260px;
   border:none;
   cursor:pointer;
   background-color: whitesmoke;
   
 }
+
 .editSelectCat{
   position:relative;
-  left:110px;
-  top:155px;
+  left:100px;
+  top:95px;
   padding:5px 20px;
   border:none;
   background-color: whitesmoke;
@@ -408,13 +441,13 @@ right:200px;
 }
 .cath{
   position: relative;
-  top:179px;
-  right:0px;
+  top:120px;
+  left:12px;
 }
 .changeCat{
   position: relative;
-  top:142px;
-  left:220px;
+  top:65px;
+  left:260px;
 }
 .descrview{
   position: relative;
@@ -441,5 +474,20 @@ right:200px;
 .titlebut{
   position:relative;
   top:42px;
-  left:15px;
+  left:55px;
+}
+.titleH{
+  position: relative;
+  top:40px;
+  left:10px;
+  
+}
+.descrH{
+  position: relative;
+  top:90px;
+  right:70px;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  margin-right: 50px;
+  margin-left: 80px;
 }

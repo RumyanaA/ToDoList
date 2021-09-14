@@ -50,5 +50,8 @@ class Storage {
             this[fieldName].splice(index, 1);
         }
     }
+    static clearField(fieldname){
+        this[fieldname].length=0
+    }
 }
 export default Storage;

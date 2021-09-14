@@ -107,8 +107,8 @@ class NewTask extends CookiesJar {
         {
             return (
                 <div className='createTask'>
-                    <InputField placeholder='Task name' label='' name='taskName' type='text' onChange={this.handleChange} />
-                    <InputField placeholder='Task description' label='' name='taskDescr' type='text' onChange={this.handleChange} />
+                    <InputField className='nametask'placeholder='Task name' label='' name='taskName' type='text' onChange={this.handleChange} />
+                    <InputField className='nametask' placeholder='Task description' label='' name='taskDescr' type='text' onChange={this.handleChange} />
                     <SelectCategory stylename='input-with-hint' getCategory={this.getData} isCatReadOnly={false} category={this.state.category} />
                     <span className="text-error">{this.state.categoryError}</span>
                     <DateComponent class='newTaskDatepicker' classbox='newdatebox' getData={this.getData} taskDue={moment(this.state.dueDate).toDate()} readonly={false}/>

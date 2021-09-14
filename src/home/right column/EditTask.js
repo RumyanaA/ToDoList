@@ -157,16 +157,17 @@ class EditTask extends Component {
     render() {
         return (
             <div>
+                <h className='titleH'><b>Your task name</b></h>
                 <textarea className='taskTitle'  readOnly={this.state.isNameReadonly} name='taskName' value={this.state.taskName} type='text' onChange={this.handleChange}></textarea>
                 <button className='titlebut' type='button' name='changeName' onClick={this.isEditable}>
                     <  BsPencil className='bsPencil' />
                 </button>
-                
+                <h  className='descrH'><b>Your task description</b></h>
                 <textarea  className='descrview' readOnly={this.state.isDescrReadonly} name='taskName' value={this.state.taskDescr} type='text' onChange={this.handleChange}></textarea>
                 <button  className='descrbut'type='button' name='changeDescr' onClick={this.isEditable}>
                     <  BsPencil className='bsPencil' />
                 </button>
-                <h className='cath'>Category:</h>
+                <h className='cath'><b>Category:</b></h>
                 <SelectCategory stylename='editSelectCat' getCategory={this.getData} isCatReadOnly={this.state.isCatReadOnly} category={this.state.category} />
                 <span className="text-error">{this.state.categoryError}</span>
                 <button type='button' className='changeCat' name='changeCat' onClick={this.isEditable}>
@@ -181,7 +182,7 @@ class EditTask extends Component {
                 <Completed getCompletedVal={this.getData} completed={this.state.completed} />
                 <Button className="editSaveTask" label="Save" onClick={this.submit} />
                 <Button className="editTask" label="Cancel" onClick={this.cancel} />
-                <Button className="editTask" label="Delete Task" onClick={this.deleteTask} />
+                <Button className="deleteTask" label="Delete Task" onClick={this.deleteTask} />
                 <p className='editWindow'> </p>
             </div>
         )

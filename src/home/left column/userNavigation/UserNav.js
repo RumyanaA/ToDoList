@@ -24,7 +24,8 @@ class UserNav extends Component{
         var MY_TOPIC = 'show all';
         PubSub.publish(MY_TOPIC, 'important');
     }
-    important(){       
+    important(){  
+        this.props.history.push('/todoList/important');     
         var MY_TOPIC = 'show important';
         PubSub.publish(MY_TOPIC, 'important');
     }
