@@ -1,6 +1,31 @@
 const client = require('./../config/dbConnect');
 var logger = require('./../services/LoggingService.js');
 class TaskModel{
+    static async getDataforHomePage(userId,skipNum){
+        try{
+            var DataToReturn={
+                tasks:[],
+                numberOfPages: 0,
+            }
+            var query ={
+                'createdby': userId
+            }
+            var totalTasksCount = await client.get().collection('Tasks').countDocuments(query)
+            var tasksOnSelectedPage= await client.get().collection('Tasks').find(query, { projection: { 'createdby': 0 } }).sort({'dueDate':1}).skip(+skipNum).limit(9).toArray()
+            if(totalTasksCount>0){
+                var itemsPerPage=9;
+                var pageNums=totalTasksCount/itemsPerPage 
+                DataToReturn.numberOfPages=Math.ceil(pageNums);
+            }
+            if(tasksOnSelectedPage.length>0){
+                DataToReturn.tasks=tasksOnSelectedPage
+            }
+            return DataToReturn;
+            
+        }catch(e){
+            logger.error(e.message)
+        }
+    }
     static async addTask(taskData){
         try{
             var result = await  client.get().collection("Tasks").insertOne(taskData)

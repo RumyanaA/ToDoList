@@ -1,5 +1,11 @@
 var TaskService = require('./../services/TaskService.js')
 class taskController{
+    static async recieveToken(req, res, next){
+        var auth = req.headers.authorization;
+        var skipNum=req.query.skipItemsnum
+        var response = await TaskService.decodeToken(auth,skipNum);
+        res.send(response);
+    }
     static async newTask(req, res, next) {
         var taskData = req.body;
 

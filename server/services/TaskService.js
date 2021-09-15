@@ -4,6 +4,15 @@ var logger = require('./LoggingService.js');
 var ObjectId = require('mongodb').ObjectId;
 var TaskModel = require('./../database/TaskModel.js')
 class TaskService{
+    static async decodeToken(auth,skipNum){
+        try{
+            var payload = jwt.verify(auth.slice(7), config.JWT_SECRET);
+            var result = await TaskModel.getDataforHomePage(payload.id,skipNum);
+            return result;
+        }catch(e){
+            logger.error(e.message);
+        }
+    }
     static async getUserId(taskData) {
         var token=taskData.createdby;
         try{

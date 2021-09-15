@@ -7,6 +7,7 @@ router.post('/Register', userController.newUser);
 router.post('/Login', userController.loginUser);
 router.post('/ResetPassword', userController.generatePassword);
 router.get('/activate/:confirmationCode',userController.activate);
+router.get('/getPaginationData', taskController.recieveToken);
 router.post('/addCategory', CategoryController.newCategory);
 router.get('/getCatName',CategoryController.getCategories);
 router.post('/SaveNewTask', taskController.newTask);

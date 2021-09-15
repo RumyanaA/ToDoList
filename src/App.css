@@ -491,3 +491,35 @@ right:200px;
   margin-right: 50px;
   margin-left: 80px;
 }
+.divContainer{
+  display:grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 50px 80px;
+  position:absolute;
+  left:350px;
+  top:70px;
+}
+.taskdiv{
+  display: inline-block;
+  
+  border: 1px double rgb(76, 0, 255);
+  border-radius: 12px;
+  padding:0px 20px 5px 6px;
+}
+.licontainer{
+  position: absolute;
+  top:650px;
+  left:550px;
+}
+.liPagenums{
+  display:inline;
+}
+.pageButton{
+  background-color:whitesmoke;
+}
+.pageButton:hover{
+  background-color: lightsteelblue;
+}
+.pageButton:focus{
+  background-color: rgb(76, 0, 255);
+}

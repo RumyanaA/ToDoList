@@ -46,3 +46,14 @@ error: Sep-06-2021 11:31:50: 	Cannot read property 'slice' of undefined
 error: Sep-08-2021 19:08:19: 	Cannot read property 'nModified' of undefined
 error: Sep-08-2021 19:08:31: 	Cannot read property 'nModified' of undefined
 error: Sep-09-2021 16:27:59: 	taskId is not defined
+error: Sep-15-2021 11:59:43: 	Cannot read property 'slice' of undefined
+error: Sep-15-2021 14:02:47: 	math is not defined
+error: Sep-15-2021 14:03:48: 	math is not defined
+error: Sep-15-2021 14:04:25: 	math is not defined
+error: Sep-15-2021 14:04:43: 	math is not defined
+error: Sep-15-2021 14:08:50: 	math is not defined
+error: Sep-15-2021 14:11:32: 	math is not defined
+error: Sep-15-2021 14:12:04: 	math is not defined
+error: Sep-15-2021 14:12:53: 	math is not defined
+error: Sep-15-2021 14:13:04: 	Cannot read property 'slice' of undefined
+error: Sep-15-2021 18:49:18: 	Skip value must be non-negative, but received: -8
