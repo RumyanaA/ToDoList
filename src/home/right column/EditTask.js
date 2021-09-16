@@ -24,7 +24,7 @@ class EditTask extends Component {
             category: this.props.taskData.category,
             dueDate: this.props.taskData.dueDate,
             important: this.props.taskData.important,
-            id: this.props.taskData.id,
+            _id: this.props.taskData._id,
             color: this.props.taskData.color,
             completed: this.props.taskData.completed,
             categoryError: '',
@@ -36,7 +36,7 @@ class EditTask extends Component {
             category: this.state.category,
             dueDate: this.state.dueDate,
             important: this.state.important,
-            id: this.state.id,
+            _id: this.state._id,
             color: this.state.color,
             completed: this.state.completed
         }
@@ -95,7 +95,7 @@ class EditTask extends Component {
                 category: this.state.category,
                 dueDate: this.state.dueDate,
                 important: this.state.important,
-                id: this.state.id,
+                _id: this.state._id,
                 completed: this.state.completed,
                 color: this.state.color
             }
@@ -112,7 +112,7 @@ class EditTask extends Component {
                     }
                     
                 }
-                Storage.replaceItem('id', this.taskInfo.id, updatedTask, 'tasks')
+                Storage.replaceItem('_id', this.taskInfo._id, updatedTask, 'tasks')
                 var result = await axios.put('http://localhost:8081/editTask', updatedTask)
                 var success = result.data;
                 if (success == 'success') {
@@ -120,13 +120,13 @@ class EditTask extends Component {
                         title: this.state.taskName,
                         start: this.state.dueDate,
                         allDay: false,
-                        id: this.taskInfo.id,
+                        id: this.taskInfo._id,
                         color: updatedTask.color,
                         important: this.state.important,
                         category: this.state.category,
                         completed: this.state.completed
                     }
-                    Storage.replaceItem('id', this.taskInfo.id, calendarEvent, 'events')
+                    Storage.replaceItem('_id', this.taskInfo._id, calendarEvent, 'events')
                     var MY_TOPIC = 'change Event';
                     PubSub.publish(MY_TOPIC, calendarEvent);
                 }
@@ -137,15 +137,15 @@ class EditTask extends Component {
     }
     async deleteTask() {
 
-        var res = await axios.delete('http://localhost:8081/deleteTask', { params: { id: this.state.id } });
+        var res = await axios.delete('http://localhost:8081/deleteTask', { params: { id: this.state._id } });
         var result = res.data;
         if (result == 'task deleted') {
-            Storage.deleteItem('id', this.state.id, 'tasks')
+            Storage.deleteItem('_id', this.state._id, 'tasks')
             alert('Task deleted successfully')
             var MY_TOPIC = 'Render topic';
             PubSub.publish(MY_TOPIC, 'cancel task');
             var MYotherTOPIC = 'remove Event';
-            PubSub.publish(MYotherTOPIC, this.state.id);
+            PubSub.publish(MYotherTOPIC, this.state._id);
         }
     }
     cancel() {
@@ -156,23 +156,27 @@ class EditTask extends Component {
 
     render() {
         return (
-            <div>
-                <h className='titleH'><b>Your task name</b></h>
-                <textarea className='taskTitle'  readOnly={this.state.isNameReadonly} name='taskName' value={this.state.taskName} type='text' onChange={this.handleChange}></textarea>
+            <div >
+                
+                <p><b>Your task name</b></p>
+                <textarea className='nametask'  readOnly={this.state.isNameReadonly} name='taskName' value={this.state.taskName} type='text' onChange={this.handleChange}></textarea>
                 <button className='titlebut' type='button' name='changeName' onClick={this.isEditable}>
                     <  BsPencil className='bsPencil' />
                 </button>
-                <h  className='descrH'><b>Your task description</b></h>
-                <textarea  className='descrview' readOnly={this.state.isDescrReadonly} name='taskName' value={this.state.taskDescr} type='text' onChange={this.handleChange}></textarea>
+                
+                
+                <p ><b>Your task description</b></p>
+                <textarea  className='nametask' readOnly={this.state.isDescrReadonly} name='taskDescr' value={this.state.taskDescr} type='text' onChange={this.handleChange}></textarea>
                 <button  className='descrbut'type='button' name='changeDescr' onClick={this.isEditable}>
                     <  BsPencil className='bsPencil' />
                 </button>
-                <h className='cath'><b>Category:</b></h>
-                <SelectCategory stylename='editSelectCat' getCategory={this.getData} isCatReadOnly={this.state.isCatReadOnly} category={this.state.category} />
+                <p  ><b>Category:</b></p>
+                <SelectCategory stylename='input-with-hint' getCategory={this.getData} isCatReadOnly={this.state.isCatReadOnly} category={this.state.category} />
                 <span className="text-error">{this.state.categoryError}</span>
                 <button type='button' className='changeCat' name='changeCat' onClick={this.isEditable}>
                     <  BsPencil className='bsPencil' />
                 </button>
+                
                 <DateComponent class='datepick' classbox='datebox' getData={this.getData} taskDue={moment(this.state.dueDate).toDate()} readonly={this.state.isDateReadOnly} />
                 <span className="text-error">{this.state.dateError}</span>
                 <button className='editDate' type='button' name='changeDate' onClick={this.isEditable}>

@@ -22,7 +22,7 @@ class CalendarComponent extends Component {
   editEvent(info){
     var selectedEventObj=info.event;
     
-    var selectedTask=Storage.getItem('id',selectedEventObj.id, 'tasks')
+    var selectedTask=Storage.getItem('_id',selectedEventObj.id, 'tasks')
     var MY_TOPIC = 'Edit task';
     PubSub.publish(MY_TOPIC, selectedTask);
     

@@ -13,11 +13,14 @@ class RightColumn extends Component {
         }
         this.mySubscriber = this.mySubscriber.bind(this);
         this.editTask = this.editTask.bind(this);
+        
     }
     componentDidMount() {
         PubSub.subscribe('Render topic', this.mySubscriber); //subscriber to New Task button
         PubSub.subscribe('Edit task', this.editTask)
+        
     }
+   
     mySubscriber(msg, data) { //subscribers have function for publishing
         switch (data) {
             case 'create task':

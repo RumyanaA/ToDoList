@@ -14,6 +14,7 @@ class Middle extends CookiesJar {
     this.state = {
       event: []
     }
+   
     this.showImportant = this.showImportant.bind(this);
     this.showCompleted = this.showCompleted.bind(this);
     this.showAll = this.showAll.bind(this);
@@ -61,7 +62,7 @@ class Middle extends CookiesJar {
           important:tasksFromCategory[j].important,
           completed:tasksFromCategory[j].completed,
           color:tasksFromCategory[j].color,
-          id:tasksFromCategory[j].id,
+          id:tasksFromCategory[j]._id,
           category: tasksFromCategory[j].category
         }
         oldState.push(eventsFromCategory);
@@ -86,7 +87,7 @@ class Middle extends CookiesJar {
         color: tasks[i].color,
         important: tasks[i].important,
         completed:tasks[i].completed,
-        id:tasks[i].id,
+        id:tasks[i]._id,
         category: tasks[i].category
       }
       oldState.push(events);
@@ -106,7 +107,7 @@ class Middle extends CookiesJar {
         start: completedTasks[i].dueDate,
         allDay: false,
         category: completedTasks[i].category,
-        id: completedTasks[i].id,
+        id: completedTasks[i]._id,
         important: completedTasks[i].important,
         completed: completedTasks[i].completed,
         color:completedTasks[i].color
@@ -116,6 +117,7 @@ class Middle extends CookiesJar {
     this.setState(oldState)
   }
   showImportant(msg, data) {
+   
     var oldState = this.state.event;
     oldState.length = 0;
     var importantTasks = Storage.getItems(data, true, 'tasks')
@@ -129,7 +131,7 @@ class Middle extends CookiesJar {
         start: importantTasks[i].dueDate,
         allDay: false,
         category: importantTasks[i].category,
-        id:importantTasks[i].id,
+        id:importantTasks[i]._id,
         important: importantTasks[i].important,
         completed: importantTasks[i].completed,
         color:importantTasks[i].color
@@ -140,6 +142,8 @@ class Middle extends CookiesJar {
     this.setState(oldState)
   }
   async componentDidMount() {
+    var MYotherTOPIC = 'Render topic';
+            PubSub.publish(MYotherTOPIC, 'cancel task');
     var storeEvents = {}
     var cookie = this.getCookie('userLogToken');
     var token = cookie.token;
@@ -157,7 +161,7 @@ class Middle extends CookiesJar {
         start: storedtasks[i].dueDate,
         allDay: false,
         category: storedtasks[i].category,
-        id: storedtasks[i].id,
+        id: storedtasks[i]._id,
         important: storedtasks[i].important,
         completed: storedtasks[i].completed,
         color: storedtasks[i].color
@@ -169,6 +173,7 @@ class Middle extends CookiesJar {
       Storage.setItem(storedtasks[i], 'tasks')
     }
     if (this.props.match.params.component == 'important'){
+      
       this.showImportant('show important','important')
     }
     if (this.props.match.params.component == 'completed'){

@@ -75,7 +75,7 @@ class NewTask extends CookiesJar {
             taskData.createdby = token.token;
             taskData.categoryId = categoryId.id;
             var result = await axios.post('http://localhost:8081/saveNewTask', taskData)
-            taskData.id = result.data;
+            taskData._id = result.data;
             delete taskData.createdby;                  //remove object createdby property before inserting into storage
             Storage.setItem(taskData, 'tasks')
             var category=Storage.getItem('name',taskData.category,'categories')
@@ -85,7 +85,7 @@ class NewTask extends CookiesJar {
                 start: this.state.dueDate,
                 allDay: false,
                 color:taskData.color,
-                id: taskData.id,
+                id: taskData._id,
                 important:this.state.important,
                 category: this.state.category,
                 completed: false

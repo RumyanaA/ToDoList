@@ -376,8 +376,8 @@ right:200px;
 }
 .deleteTask{
   position:relative;
-  bottom:330px;
-  right:50px;
+  top:100px;
+  right:32px;
 }
 .deleteTask:hover{
   background-color: rgb(240, 233, 233);
@@ -396,17 +396,17 @@ right:200px;
 }
 .completed{
   position:relative;
-  top:150px;
+  top:70px;
   right:100px;
 }
 .important{
   position:relative;
-  top:115px;
+  top:40px;
   right:9.5px;
 }
 .datepick{
   position:relative;
-  top:100px;
+  top:20px;
   left:3px;
   padding:5px;
   width: 77%;
@@ -419,9 +419,9 @@ right:200px;
 }
 .editDate{
   position:relative;
-  top:70px;
+  bottom:13px;
   left:260px;
-  border:none;
+  
   cursor:pointer;
   background-color: whitesmoke;
   
@@ -446,8 +446,8 @@ right:200px;
 }
 .changeCat{
   position: relative;
-  top:65px;
-  left:260px;
+  bottom:33px;
+  left:250px;
 }
 .descrview{
   position: relative;
@@ -459,9 +459,10 @@ right:200px;
 }
 .descrbut{
   position:relative;
-  top:92px;
-  left:15px;
+  bottom:13px;
+  left:63px;
 }
+
 .taskTitle{
   position: relative;
   top:50px;
@@ -473,8 +474,8 @@ right:200px;
 }
 .titlebut{
   position:relative;
-  top:42px;
-  left:55px;
+  bottom:12px;
+  left:65px;
 }
 .titleH{
   position: relative;
@@ -506,6 +507,7 @@ right:200px;
   border-radius: 12px;
   padding:0px 20px 5px 6px;
 }
+
 .licontainer{
   position: absolute;
   top:650px;
@@ -522,4 +524,8 @@ right:200px;
 }
 .pageButton:focus{
   background-color: rgb(76, 0, 255);
+}
+.rah-input-wrapper{
+  position:inherit;
+  
 }

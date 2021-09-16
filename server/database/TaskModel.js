@@ -60,7 +60,7 @@ class TaskModel{
                     category: result[i].category,
                     completed: result[i].completed,
                     color: result[i].color,
-                    id: result[i]._id,
+                    _id: result[i]._id,
                     
                 })
             }

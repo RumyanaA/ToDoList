@@ -53,7 +53,7 @@ class TaskService{
         }
         
         var taskId={
-            _id: ObjectId(taskNewData.id)
+            _id: ObjectId(taskNewData._id)
               }
         var result = await TaskModel.editTask(taskId,newValues)
         return result;
