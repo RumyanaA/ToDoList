@@ -30,6 +30,7 @@ class UserNav extends Component{
         PubSub.publish(MY_TOPIC, 'important');
     }
     completed(){
+        this.props.history.push('/todoList/completed');
         var MY_TOPIC = 'show completed';
         PubSub.publish(MY_TOPIC, 'completed');
     }

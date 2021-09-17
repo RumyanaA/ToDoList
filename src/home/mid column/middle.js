@@ -12,9 +12,10 @@ class Middle extends CookiesJar {
     super(props);
     this.urlParam = props.match.params.component;
     this.state = {
-      event: []
+      event: [],
+      checkedCategories:[]
     }
-   
+    this.token=null;
     this.showImportant = this.showImportant.bind(this);
     this.showCompleted = this.showCompleted.bind(this);
     this.showAll = this.showAll.bind(this);
@@ -22,6 +23,15 @@ class Middle extends CookiesJar {
     this.editTask = this.editTask.bind(this);
     this.manageCategory = this.manageCategory.bind(this);
     this.removeEvent = this.removeEvent.bind(this);
+    this.getCategories=this.getCategories.bind(this);
+  }
+  getCategories(msg,data){
+    
+    var catNames=[]
+    for(var i=0;i<data.length;i++){
+      catNames.push(data[i].name)
+    }
+    this.setState({checkedCategories:catNames})
   }
   addNewTask(msg, data) { //function for publishing
     var oldState = this.state.event;
@@ -48,102 +58,128 @@ class Middle extends CookiesJar {
     
   }
   manageCategory(msg, data) {
-    
+    var tasksFromCategory
+    var tasksTostate
     var oldState = this.state.event;
     oldState.length = 0;
     for (var i = 0; i < data.length; i++) {
-      var tasksFromCategory = Storage.getItems('category', data[i], 'tasks')
+      if(this.props.match.params.component=='important'){
+         tasksFromCategory= Storage.getItems('category', data[i], 'tasks')
+         tasksTostate = tasksFromCategory.filter(task=>task.important==true)
+      }else if(this.props.match.params.component=='completed'){
+       tasksFromCategory = Storage.getItems('category', data[i], 'tasks')
+       tasksTostate = tasksFromCategory.filter(task=>task.completed==true)
+      }else{
+        tasksFromCategory= Storage.getItems('category', data[i],'tasks')
+        tasksTostate=tasksFromCategory.filter(task=>task.completed==false)
+      }
       var eventsFromCategory = {};
-      for (var j = 0; j < tasksFromCategory.length; j++) {
+      for (var j = 0; j < tasksTostate.length; j++) {
         eventsFromCategory = {
-          title: tasksFromCategory[j].taskName,
-          start: tasksFromCategory[j].dueDate,
+          title: tasksTostate[j].taskName,
+          start: tasksTostate[j].dueDate,
           allDay: false,
-          important:tasksFromCategory[j].important,
-          completed:tasksFromCategory[j].completed,
-          color:tasksFromCategory[j].color,
-          id:tasksFromCategory[j]._id,
-          category: tasksFromCategory[j].category
+          important:tasksTostate[j].important,
+          completed:tasksTostate[j].completed,
+          color:tasksTostate[j].color,
+          id:tasksTostate[j]._id,
+          category: tasksTostate[j].category
         }
         oldState.push(eventsFromCategory);
       }
     }
-    this.setState(oldState)
+    this.setState({event:oldState, checkedCategories:data})
+    
   }
 
   showAll(msg, data) {
+    var allTasksFromCat=[]
     var oldState = this.state.event;
+    var categories=this.state.checkedCategories;
     oldState.length = 0;
     var tasks = Storage.getField('tasks')
-    
+    for(var j=0;j<categories.length;j++){
+      allTasksFromCat.push(...tasks.filter(item=>item.category==categories[j]));
+    }
     
     var events = {};
-    for (var i = 0; i < tasks.length; i++) {
-      if(!tasks[i].completed){
+    for (var i = 0; i < allTasksFromCat.length; i++) {
+      if(!allTasksFromCat[i].completed){
       events = {
-        title: tasks[i].taskName,
-        start: tasks[i].dueDate,
+        title: allTasksFromCat[i].taskName,
+        start: allTasksFromCat[i].dueDate,
         allDay: false,
-        color: tasks[i].color,
-        important: tasks[i].important,
-        completed:tasks[i].completed,
-        id:tasks[i]._id,
-        category: tasks[i].category
+        color: allTasksFromCat[i].color,
+        important: allTasksFromCat[i].important,
+        completed:allTasksFromCat[i].completed,
+        id:allTasksFromCat[i]._id,
+        category: allTasksFromCat[i].category
       }
       oldState.push(events);
     }
     }
-    this.setState(oldState)
+    this.setState({event:oldState})
   
   }
   showCompleted(msg, data) {
+    var completedTasksFromCat=[]
+    var categories=this.state.checkedCategories
     var oldState = this.state.event;
     oldState.length = 0;
     var completedTasks = Storage.getItems(data, true, 'tasks')
+    for(var j=0;j<categories.length;j++){
+      completedTasksFromCat.push(...completedTasks.filter(item=>item.category==categories[j]));
+    }
     var completedEvents = {};
-    for (var i = 0; i < completedTasks.length; i++) {
+    for (var i = 0; i < completedTasksFromCat.length; i++) {
       completedEvents = {
-        title: completedTasks[i].taskName,
-        start: completedTasks[i].dueDate,
+        title: completedTasksFromCat[i].taskName,
+        start: completedTasksFromCat[i].dueDate,
         allDay: false,
-        category: completedTasks[i].category,
-        id: completedTasks[i]._id,
-        important: completedTasks[i].important,
-        completed: completedTasks[i].completed,
-        color:completedTasks[i].color
+        category: completedTasksFromCat[i].category,
+        id: completedTasksFromCat[i]._id,
+        important: completedTasksFromCat[i].important,
+        completed: completedTasksFromCat[i].completed,
+        color:completedTasksFromCat[i].color
       }
       oldState.push(completedEvents);
     }
-    this.setState(oldState)
+    this.setState({event:oldState})
   }
   showImportant(msg, data) {
-   
+    var categories=this.state.checkedCategories
+    var importantTasksFromCat=[];
     var oldState = this.state.event;
     oldState.length = 0;
     var importantTasks = Storage.getItems(data, true, 'tasks')
+    for(var j=0;j<categories.length;j++){
+      importantTasksFromCat.push(...importantTasks.filter(item=>item.category==categories[j]));
+    }
    
     
     var importantEvents = {};
-    for (var i = 0; i < importantTasks.length; i++) {
-      if(!importantTasks[i].completed){
+    for (var i = 0; i < importantTasksFromCat.length; i++) {
+      if(!importantTasksFromCat[i].completed){
       importantEvents = {
-        title: importantTasks[i].taskName,
-        start: importantTasks[i].dueDate,
+        title: importantTasksFromCat[i].taskName,
+        start: importantTasksFromCat[i].dueDate,
         allDay: false,
-        category: importantTasks[i].category,
-        id:importantTasks[i]._id,
-        important: importantTasks[i].important,
-        completed: importantTasks[i].completed,
-        color:importantTasks[i].color
+        category: importantTasksFromCat[i].category,
+        id:importantTasksFromCat[i]._id,
+        important: importantTasksFromCat[i].important,
+        completed: importantTasksFromCat[i].completed,
+        color:importantTasksFromCat[i].color
       }
       oldState.push(importantEvents);
     }
     }
-    this.setState(oldState)
+    this.setState({event:oldState})
   }
   async componentDidMount() {
     var MYotherTOPIC = 'Render topic';
             PubSub.publish(MYotherTOPIC, 'cancel task');
+            var categories=[]
+       
     var storeEvents = {}
     var cookie = this.getCookie('userLogToken');
     var token = cookie.token;
@@ -153,8 +189,11 @@ class Middle extends CookiesJar {
     var res = await axios.get('http://localhost:8081/getAllTasks', config)
     var storedtasks = res.data;
     Storage.clearField('tasks')
+    var oldState = this.state.event;
+    categories=Storage.getPropValues('name','isChecked',true,'categories')
+       this.setState({checkedCategories:categories})
     for (var i = 0; i < storedtasks.length; i++) {
-      if(!storedtasks[i].completed){
+      if(!storedtasks[i].completed && categories.includes(storedtasks[i].category)){
         
       storeEvents = {
         title: storedtasks[i].taskName,
@@ -166,12 +205,16 @@ class Middle extends CookiesJar {
         completed: storedtasks[i].completed,
         color: storedtasks[i].color
       }
-      var oldState = this.state;
-      oldState.event.push(storeEvents);
-      this.setState(oldState);
+      
+      oldState.push(storeEvents);
+      
     } 
+    
+    this.setState({event:oldState});
       Storage.setItem(storedtasks[i], 'tasks')
+      
     }
+    
     if (this.props.match.params.component == 'important'){
       
       this.showImportant('show important','important')
@@ -182,10 +225,18 @@ class Middle extends CookiesJar {
     PubSub.subscribe('show important', this.showImportant);
     PubSub.subscribe('show completed', this.showCompleted);
     PubSub.subscribe('manage category', this.manageCategory);
-    PubSub.subscribe('show all', this.showAll);
+    this.token=PubSub.subscribe('show all', this.showAll);
     PubSub.subscribe('Add Event', this.addNewTask); //subscriber to submit button on New Task component
     PubSub.subscribe('change Event', this.editTask);
     PubSub.subscribe('remove Event', this.removeEvent);
+    PubSub.subscribe('get categories', this.getCategories)
+  }
+  componentWillUnmount(){
+    PubSub.unsubscribe('show all');
+    PubSub.unsubscribe('show important');
+    PubSub.unsubscribe('show completed');
+    PubSub.unsubscribe('manage category');
+    // PubSub.unsubscribe('get categories');
   }
   render = () => {
     var toRender;
@@ -199,6 +250,10 @@ class Middle extends CookiesJar {
 
       toRender = <CalendarComponent data={this.state.event} />
     }
+     if (this.props.match.params.component == 'completed') {
+
+    toRender = <CalendarComponent data={this.state.event} />
+  }
 
     return (
       <div >

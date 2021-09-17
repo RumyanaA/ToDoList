@@ -5,6 +5,7 @@ import InputField from "../../../InputField";
 import CookiesJar from "../../../CookiesJar";
 import Storage from "../../../Storage";
 import CatCheckbox from './categoriesCheckbox';
+import PubSub from "pubsub-js";
 class Categories extends CookiesJar {
     constructor(props) {
         super(props);
@@ -80,6 +81,8 @@ class Categories extends CookiesJar {
             Storage.setItem(storeCategories, 'categories')
         }
         this.setState(oldState);
+        var topic='get categories'
+        PubSub.publish(topic,oldState.catArray)
     }
     
     handleChange(event) {

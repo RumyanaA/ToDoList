@@ -17,13 +17,23 @@ class Storage {
 
     }
     static getItems(key, value, fieldname) {
-        var result = this[fieldname].filter(item => item[key] == value)
+        var result = this[fieldname].filter(item =>item[key] == value )
         return result;
     }
     static getAll(key, fieldName) {
         var result = this[fieldName].map(item => item[key]);
         return result;
     }
+    static getPropValues(key,key2,value2,fieldName){
+        var items=[]
+        // for(var i=0;i<this[fieldName].length;i++){
+        //     items.push(this[fieldName][i][key])
+        // }
+        this[fieldName].forEach(item=>(item[key2]==value2)? items.push(item[key]) : null)
+        return items;
+    }
+
+    
     static getField(fieldName) {
         var result = this[fieldName];
         return result;
