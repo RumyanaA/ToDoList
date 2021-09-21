@@ -1,11 +1,11 @@
-#To do List
+# To do List
 
 ## Installation:
 * Download /clone repository from git
 * npm install
 * npm start and npm run-script run
 
-##Features
+## Features
 * registration
 * login
 * create categories
@@ -15,7 +15,7 @@
 * sort by category
 * sort by important and completed
 
-##Technologies used:
+## Technologies used:
 * HTML
 * CSS
 * Javascript
