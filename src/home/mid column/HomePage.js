@@ -22,6 +22,7 @@ class HomePage extends CookiesJar {
         this.editTask = this.editTask.bind(this);
         this.manageCategory = this.manageCategory.bind(this);
         this.getCategories = this.getCategories.bind(this);
+        this.removeTask = this.removeTask.bind(this);
     }
     openEdit(event) {
         var taskid = event.currentTarget.id
@@ -38,6 +39,14 @@ class HomePage extends CookiesJar {
             this.setState(prevState)
         }
     }
+    removeTask(msg, data) {
+        var prevState = this.state.tasksToDisplay;
+        var index = prevState.findIndex(item => item._id == data)
+        if (index > - 1) {
+            prevState.splice(index, 1)
+        }
+        this.setState(prevState)
+    }
     getCategories(msg, data) {
 
         var catNames = []
@@ -49,10 +58,10 @@ class HomePage extends CookiesJar {
     manageCategory(msg, data) {
         var oldstate = this.state.checkedCategories
         oldstate.length = 0
-        for(var i=0;i<data.length;i++){
+        for (var i = 0; i < data.length; i++) {
             oldstate.push(data[i])
         }
-        
+
         this.setState({ checkCategories: oldstate })
 
     }
@@ -81,7 +90,7 @@ class HomePage extends CookiesJar {
 
     }
     async componentDidMount() {
-        var categories=[]
+        var categories = []
         var MYotherTOPIC = 'Render topic';
         PubSub.publish(MYotherTOPIC, 'cancel task');
         var cookie = this.getCookie('userLogToken');
@@ -99,10 +108,10 @@ class HomePage extends CookiesJar {
         for (var i = 0; i < pageData.numberOfPages; i++) {
             emptyArr.push(i)
         }
-        categories=Storage.getPropValues('name','isChecked',true,'categories')
-        this.setState({checkedCategories:categories})
+        categories = Storage.getPropValues('name', 'isChecked', true, 'categories')
+        this.setState({ checkedCategories: categories })
         for (var j = 0; j < pageData.tasks.length; j++) {
-            
+
             emptyTasksArr.push(pageData.tasks[j])
             Storage.setItem(pageData.tasks[j], 'tasks')
         }
@@ -110,11 +119,12 @@ class HomePage extends CookiesJar {
         this.FirstPageButton.current.focus()
         PubSub.subscribe('change Event', this.editTask);
         PubSub.subscribe('manage category', this.manageCategory);
-        PubSub.subscribe('get categories', this.getCategories)
+        PubSub.subscribe('get categories', this.getCategories);
+        PubSub.subscribe('remove Event', this.removeTask);
     }
     render() {
         var number = 1;
-        var currentCheckedCat=this.state.checkedCategories
+        var currentCheckedCat = this.state.checkedCategories
         return (
             <div>
                 <div className='divContainer'>

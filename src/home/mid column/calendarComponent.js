@@ -55,7 +55,7 @@ class CalendarComponent extends Component {
           width={400}
           dayMaxEvents={true}
         />
-        <Button label="add Task" onClick={this.addTask} />
+       {this.props.renderButton? <Button label="add Task" onClick={this.addTask} />: null} 
       </div>
     )
   }

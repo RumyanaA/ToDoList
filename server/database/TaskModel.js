@@ -8,7 +8,8 @@ class TaskModel{
                 numberOfPages: 0,
             }
             var query ={
-                'createdby': userId
+                'createdby': userId,
+                'completed': false
             }
             var totalTasksCount = await client.get().collection('Tasks').countDocuments(query)
             var tasksOnSelectedPage= await client.get().collection('Tasks').find(query, { projection: { 'createdby': 0 } }).sort({'dueDate':1}).skip(+skipNum).limit(9).toArray()

@@ -7,6 +7,7 @@ import Notifications from "./notifications";
 import Storage from "../../Storage";
 import PubSub from 'pubsub-js';
 import CookiesJar from "../../CookiesJar";
+import Button from './../../Button'
 class Middle extends CookiesJar {
   constructor(props) {
     super(props);
@@ -43,7 +44,11 @@ class Middle extends CookiesJar {
     var prevState=this.state.event;
     var index=prevState.findIndex(item => item.id == data.id)
     if(index>-1){
+      if(data.completed==true){
+        prevState.splice(index,1)
+      }else{
       prevState[index]=data      
+      }
       this.setState(prevState)
     }
 
@@ -240,11 +245,9 @@ class Middle extends CookiesJar {
   }
   render = () => {
     var toRender;
-    if (this.props.match.params.component == 'notifications') {
-      toRender = <Notifications />
-    }
+    
     if (this.props.match.params.component == 'calendar' /*&& window.location.pathname !='/todoList/calendar'*/) {
-      toRender = <CalendarComponent data={this.state.event} />
+      toRender = <CalendarComponent data={this.state.event} renderButton={true} /> 
 
     } if (this.props.match.params.component == 'important') {
 
